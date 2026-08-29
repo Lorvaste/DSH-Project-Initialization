@@ -29,7 +29,7 @@ AI 产品创建对齐插件。
 
 ### 安装
 
-> 完整安装指引（目录定位/验证/更新/卸载/常见问题）见 **[INSTALL.md](INSTALL.md)**。
+> 完整安装指引（目录定位/更新/卸载/常见问题）见 **[INSTALL.md](INSTALL.md)**。
 
 **方式一：手动复制（零构建）**
 
@@ -47,19 +47,13 @@ Copy-Item presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets
 
 安装插件包（`dsh-project-initialization`）后，`cordis.patch.yml` 会把 `presets/` 注册为 preset root（`trust: system`），两个场景自动出现在名单。
 
-> ✅ 已实测：安装插件包后，宿主启动时自动把 presets/ 同步到 `.agent-presets`（幂等，与手动复制等效）。
+> 安装插件包后，宿主启动时自动把 presets/ 同步到 `.agent-presets`（幂等，与手动复制等效）。
 
 ### 使用
 
 1. DSH 新建会话，选一个场景
 2. **从零开始**：确认工作区 → git → 骨架 → 问答六步 → 冻结 → 规格初稿 + 任务拆分 → 推送
 3. **先等等，让我确认一下**：提交初版方案完善成档，或改进行中项目的方案和目标
-
-### 验证安装
-
-```powershell
-node tools/verify-runtime.js   # 校验 preset 结构、skill 发现与隔离配置
-```
 
 ## 工作原理
 
@@ -79,13 +73,11 @@ node tools/verify-runtime.js   # 校验 preset 结构、skill 发现与隔离配
 ├── presets/
 │   ├── from-scratch/       场景「从零开始」：agent.cordis.yml + 4 个 skill + assets 模板
 │   └── confirm-first/      场景「先等等，让我确认一下」：agent.cordis.yml + polish skill
-├── INSTALL.md              安装指引（目录定位/验证/更新/卸载/常见问题）
+├── INSTALL.md              安装指引（目录定位/更新/卸载/常见问题）
 ├── Reference/
 │   └── project-structure.md   项目结构规范参考
 ├── Rules.md                项目规范（骨架生成文件母版）
 ├── Structure.md            仓库结构说明
-├── tools/
-│   └── verify-runtime.js   运行时验证脚本（$DSH_HOME 环境变量解析）
 ├── package.json            薄插件壳（dsh bundle manifest）
 ├── cordis.patch.yml        插件壳注册（presets/ root）
 └── LICENSE                 Apache-2.0

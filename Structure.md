@@ -24,12 +24,11 @@ DSH-Project Initialization/
 │       ├── preset.yml        元数据：显示名「先等等，让我确认一下」
 │       ├── LICENSE           Apache-2.0
 │       └── skills/           polish（双子场景：初版完善/变更目标）
-├── .gitignore        git 忽略规则（含密钥凭据覆盖）
+├── .gitignore        git 忽略规则（含密钥凭据覆盖、Not public/）
 ├── .gitattributes    换行符规范（统一 LF）
 ├── package.json      薄插件壳（dsh bundle manifest）
 ├── cordis.patch.yml  插件壳注册（presets/ root）
-├── tools/
-│   └── verify-runtime.js 运行时验证脚本
+└── Not public/       不公开内容（本地维护，不随仓库提交：开发计划/进度/访谈记录/开发期脚本）
 ```
 
 ## 两条路径（插件流程）

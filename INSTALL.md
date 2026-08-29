@@ -1,6 +1,6 @@
 # 安装指引
 
-DSH 插件「产品创建对齐」（`DSH-Project-Initialization`）的完整安装、验证、更新与卸载说明。
+DSH 插件「产品创建对齐」（`DSH-Project-Initialization`）的完整安装、更新与卸载说明。
 
 ---
 
@@ -43,37 +43,16 @@ Copy-Item presets\confirm-first $presets -Recurse
 
 ### 方式二：插件市场（随附 preset）
 
-安装 npm 包 `dsh-project-initialization`（加入 DSH profile 依赖 + bundles 列表）后，宿主启动时插件壳自动把包内 `presets/` 同步到 `.agent-presets`，两个场景自动出现在名单（已验证）。
+安装 npm 包 `dsh-project-initialization`（加入 DSH profile 依赖 + bundles 列表）后，宿主启动时插件壳自动把包内 `presets/` 同步到 `.agent-presets`，两个场景自动出现在名单。
 
-> ✅ 已实测：插件壳注册生效——宿主启动时自动把包内 presets/ 同步到 `.agent-presets`（幂等复制），与手动复制等效；插件更新后重启即同步。
+> 插件壳注册机制：宿主启动时自动把包内 presets/ 同步到 `.agent-presets`（幂等复制），与手动复制等效；插件更新后重启即同步。
 
-## 第三步：验证安装
+## 第三步：检查安装
 
-用仓库自带的验证脚本（或等效检查）：
+在 DSH 新建会话，检查场景选择器是否出现「从零开始」和「先等等，让我确认一下」。
 
-```powershell
-node tools/verify-runtime.js
-```
-
-预期输出（节选）：
-
-```
-===== preset: from-scratch =====
-[baseUrl 表达式] OK → <...>\from-scratch\skills\
-[发现的 skill] freeze, interview, scaffold, task-split
-[preset.yml name] 从零开始
-===== preset: confirm-first =====
-[发现的 skill] polish
-[preset.yml name] 先等等，让我确认一下
-===== 汇总 =====
-from-scratch skills: freeze, interview, scaffold, task-split
-confirm-first skills: polish
-```
-
-- 两个 preset 的 name 正确、skill 全部发现 → 安装成功
-- 缺 skill 或报错 → 检查第二步的目录结构（是否有嵌套）、`agent.cordis.yml` 是否完整
-
-也可在 DSH 新建会话，检查场景选择器是否出现「从零开始」和「先等等，让我确认一下」。
+- 两个场景都在 → 安装成功
+- 缺场景 → 检查第二步的目录结构（是否有嵌套）、`agent.cordis.yml` 是否完整
 
 ## 使用
 
@@ -105,7 +84,7 @@ Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\confirm-first" -Rec
 
 | 问题 | 原因与处理 |
 |---|---|
-| 场景选择器看不到两个场景 | preset 目录路径不对或结构不完整——重跑验证脚本；确认复制到 `.agent-presets` 下（不是里面再套一层）|
+| 场景选择器看不到两个场景 | preset 目录路径不对或结构不完整——检查目录结构与 `agent.cordis.yml`；确认复制到 `.agent-presets` 下（不是里面再套一层）|
 | 场景里没有场景 skill | `customSkillDirs` 的 baseUrl 解析失败——确认 `agent.cordis.yml` 的 skill-filesystem 行是 baseUrl 范式（官方写法），preset 目录含 `skills/` |
 | skill 列表里出现无关 skill | 全局 skill 泄漏——确认 `includeDefaultRoots: false` 在 `agent.cordis.yml` 的 skill-filesystem 行 |
 | git 操作报 dubious ownership | Windows 常见：用 `git -c safe.directory="<路径>" <cmd>` 逐命令绕过，勿改全局配置 |
