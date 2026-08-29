@@ -4,7 +4,7 @@
 
 - 远程仓库：`git@github.com:Lorvaste/DSH-Project-Initialization.git`（SSH）
 - 默认分支：`main`
-- 状态：设计定案 + 双场景实现完成，验证阶段进行中
+- 许可：Apache-2.0
 
 ## 项目愿景
 
@@ -56,18 +56,20 @@ Copy-Item presets\confirm-first "$env:USERPROFILE\.dsh\.agent-presets\" -Recurse
 2. 「从零开始」：确认工作区 → git → 骨架 → 六步访谈 → 冻结 → spec 初版终稿 + 任务拆分初稿 → 推送
 3. 「先等等，让我确认一下」：① 提交初版方案完善成档；② 修改进行中项目的方案与目标
 
-## 文档目录
+## 仓库结构
 
-| 文件 | 内容 |
-|---|---|
-| [Reference/IDEA.md](Reference/IDEA.md) | 需求理解（v0.2 草案，65+ 条决策记录）|
-| [plan.md](plan.md) | 项目结构规范 + 开发计划 + 验收规则 |
-| [Rules.md](Rules.md) | 项目规范（语言/上下文/开发/术语/骨架分工）|
-| [Structure.md](Structure.md) | 项目内容结构化说明 |
-| [Progress.md](Progress.md) | 项目进度 |
-| [Other/findings.md](Other/findings.md) | 访谈发现与决策思路 |
-| presets/ | 双场景 preset（agent.cordis.yml + skills/ + assets/）|
+```
+DSH-Project Initialization/
+├── presets/
+│   ├── from-scratch/       场景「从零开始」（agent.cordis.yml + 4 skill + assets 模板）
+│   └── confirm-first/      场景「先等等，让我确认一下」（agent.cordis.yml + polish skill）
+├── plan.md                 项目结构规范（脚手架模板母版）
+├── Rules.md                项目规范（骨架生成文件母版）
+├── Structure.md            仓库结构说明
+├── package.json            薄插件壳（dsh bundle manifest）
+├── cordis.patch.yml        插件壳注册（presets/ root）
+├── verify-runtime.js       运行时验证脚本（$DSH_HOME 环境变量解析）
+└── LICENSE                 Apache-2.0
+```
 
-## 许可
-
-Apache-2.0
+> 开发进度、需求决策记录等内部内容不随公开仓库提交（本地维护）。

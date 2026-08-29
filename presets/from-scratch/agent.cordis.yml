@@ -9,7 +9,7 @@
 # - 工具均为宿主行引用（standard 同款），本场景不自带工具代码
 # - 保留 compaction（长会话：访谈+冻结可能跨很多轮）
 # - skill 隔离：includeDefaultRoots: false 防止用户/项目全局 skill（如 using-superpowers）
-#   泄漏进场景；只扫描场景自身 skills/（customSkillDirs，路径解析待验证阶段实测）
+#   泄漏进场景；customSkillDirs 用 baseUrl 范式（已实测通过）
 
 # ── identity ────────────────────────────────────────────────────────────────
 

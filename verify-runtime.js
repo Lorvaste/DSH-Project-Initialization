@@ -1,10 +1,14 @@
 // 运行时验证脚本：验证 customSkillDirs baseUrl 表达式与 agent.cordis.yml 结构
 // 模拟 dsh-agent-presets 挂载时注入的 baseUrl（preset 目录的 file:// URL）
+// 预设目录：优先 $DSH_HOME/.agent-presets，回退 ~/.dsh/.agent-presets
 import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 
-const presetsHome = 'C:/Users/Administrator/AppData/Roaming/dsh-desktop/harness/.agent-presets';
+const presetsHome = process.env.DSH_HOME
+  ? path.join(process.env.DSH_HOME, '.agent-presets')
+  : path.join(os.homedir(), '.dsh', '.agent-presets');
 
 function verifyPreset(name) {
   console.log(`\n===== preset: ${name} =====`);

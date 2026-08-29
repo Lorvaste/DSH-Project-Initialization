@@ -19,6 +19,18 @@ pnpm-debug.log*
 Thumbs.db
 Desktop.ini
 
+# 密钥与凭据
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+credentials*
+id_rsa
+id_ed25519
+
 # DSH 本地
 *.local
 .hmr/
