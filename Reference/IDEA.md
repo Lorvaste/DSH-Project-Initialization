@@ -74,23 +74,46 @@ AI 辅助开发把这套纪律压缩成了「一句话想法 → 直接产出」
 | 项 | 定案 |
 |---|---|
 | 仓库 | `github.com/Lorvaste/DSH-Project-Initialization`（**现有仓库即项目本体，项目名不变**；GitHub topic: `dsh-plugin`）|
-| 结构 | **仓库即 preset**：preset 文件（agent.cordis.yml/preset.yml/skills/assets）位于仓库根，与项目文档（plan.md 规范：README/plan/Rules 等）共存——本仓库既是项目也是可直接复制的 preset |
-| 交付 | 双通道：① 复制仓库 preset 文件 → `~/.agent-presets/`（GitHub 手动，零构建）② 薄插件壳 → DSH 插件市场（随附 preset，`includeShippedRoot` 机制）|
+| 结构 | **presets/ 多场景目录**（agent-presets root 扫描机制：root 目录下每个子目录为一个 preset）——from-scratch 与 confirm-first 场景并存；项目文档在仓库根 |
+| 交付 | 双通道：① 复制 presets/ 下 preset 目录 → `~/.agent-presets/`（GitHub 手动，零构建）② 薄插件壳 → DSH 插件市场（随附 preset，`includeShippedRoot` 机制）|
 | 工具引用 | **宿主行引用**（standard 同款 ask-user/fs/bash），场景不自带工具代码，保持「流程+文档层」轻量定位 |
 
 ```
-DSH-Project-Initialization/（仓库根 = 项目 + preset 共存）
-├── agent.cordis.yml   ← 工具白名单（宿主行引用）★ preset 文件
-├── preset.yml         ← 显示名「从零开始」+ 描述 ★ preset 文件
-├── skills/            ← 脚手架/访谈/冻结成档/任务拆分 skill ★ preset 文件
-├── assets/            ← 默认骨架模板（{{占位符}}）★ preset 文件
-├── README.md          ← 项目说明 + 双通道安装说明
-├── LICENSE            ← Apache-2.0
-├── plan.md / Rules.md / Structure.md / Progress.md / Other/ / Reference/   ← 项目文档（plan.md 规范）
+DSH-Project Initialization/（仓库根）
+├── presets/                 ← agent-presets root（扫描目录）
+│   ├── from-scratch/        ← 场景「从零开始」
+│   │   ├── agent.cordis.yml / preset.yml / skills/ / assets/
+│   └── confirm-first/        ← 场景「先等等，让我确认一下」
+│       ├── agent.cordis.yml / preset.yml / skills/
+├── README.md / LICENSE / plan.md / Rules.md / Structure.md / Progress.md / Other/ / Reference/   ← 项目文档
 ├── .gitignore / .gitattributes / .git
-├── package.json       ← 薄插件壳
-└── cordis.patch.yml   ← 插件壳注册
+├── package.json             ← 薄插件壳
+└── cordis.patch.yml         ← 插件壳注册（roots → ./presets）
 ```
+
+### 2.4 场景「先等等，让我确认一下」（设计定案，实现中）
+
+> 命名：**「先等等，让我确认一下」**（用户定案；preset id `confirm-first`）。场景灵魂：每一步先停下来确认——复述核对/变更确认，对齐机制的本质。
+
+| 项 | 定案 |
+|---|---|
+| preset 结构 | **单 preset 双子场景**（进入后选择）|
+| 实现时机 | **现在实现**（v1 双场景）|
+| 复用关系 | 复用 from-scratch 的成档逻辑（freeze/task-split 的 spec/tasks 结构），新增 **polish**（完善/变更）skill |
+
+**子场景 ①：初版方案完善**
+- 输入：用户提交初版方案（粘贴/文档）
+- 流程：AI 结构化理解（四类规格 + 功能域 MOD-xx 重述）→ 用户核对理解（复述确认）→ 遍历性验证（缺口/模糊点/逻辑漏洞 → 问题清单 → 用户确认 → 逐项补充）→ 成档 spec 初版终稿（复用 freeze 逻辑）→ 可选任务拆分初稿（复用 task-split）→ 推送
+
+**子场景 ②：修改方案与目标（进行中项目）**
+- 输入：已有项目（spec/tasks/代码/git）
+- 流程：确认工作区 + git 状态与远端 → 理解现有文档 + 用户核对 → 用户提出变更需求 → 变更访谈（聚焦变更范围，一次一问）→ 更新 spec（**版本递增 vX.Y→vX.(Y+1) + 变更记录显式化 + 受影响条目标记 + 新增条目**）→ 更新 tasks（受影响任务标注）→ 推送
+
+**与「从零开始」的关系**：共用 spec/tasks 文档结构（F/D/R/I + MOD），可互相衔接——从零开始的产物（spec 初版终稿）= 进行中场景的输入。
+
+**工具白名单**：与 from-scratch 同款（ask-user/fs/fs-search/bash|pwsh/skill/compaction）。
+
+**变更管理机制**（子场景②核心）：spec 版本递增 + 变更记录显式化 + 受影响条目标记——防「静默漂移」闸门落地。
 
 ---
 
@@ -451,3 +474,7 @@ Embedded/             嵌入式开发相关文件
 | 55 | 项目/仓库名维持 `DSH-Project-Initialization`（用户定案）；preset id `from-scratch`；显示名「从零开始」| 定案 |
 | 56 | **验收流程不在插件范围**（执行/验收交场景外后续会话，插件不实现验收流程与验收格式设计）| 用户指定 |
 | 57 | spec 移除验收要点字段（纯需求描述）；实体验收机制移出插件需求 | 裁决 |
+| 58 | 结构演进：presets/ 多场景目录（agent-presets root 扫描机制）；双场景并存 | 定案（机制正确性）|
+| 59 | 场景「先等等，让我确认一下」：单 preset 双子场景（初版方案完善 / 修改方案与目标）| 裁决 |
+| 60 | 该场景现在实现（v1 双场景）；复用 freeze/task-split 成档逻辑，新增 polish skill | 裁决 |
+| 61 | 场景命名定案：「先等等，让我确认一下」（preset id `confirm-first`）| 用户定案 |

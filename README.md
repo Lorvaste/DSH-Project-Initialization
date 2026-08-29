@@ -30,3 +30,30 @@ AI 辅助从零创建产品时，最终产物与最初想法经常不一致。�
 | [Progress.md](Progress.md) | 项目进度 |
 | [Other/findings.md](Other/findings.md) | 访谈发现与决策思路 |
 | Reference/ | 参考文件 |
+
+## 安装（双通道）
+
+本仓库即插件「产品创建对齐」，含两个场景 preset：**从零开始**（`from-scratch`）+ **先等等，让我确认一下**（`confirm-first`）。两种安装方式：
+
+**方式一：手动复制（零构建）**
+
+```powershell
+# 将 preset 目录复制到 DSH 的 agent-presets 目录
+# （presets/from-scratch/ 与 presets/confirm-first/，各自含 agent.cordis.yml）
+Copy-Item presets\from-scratch "$env:USERPROFILE\.dsh\.agent-presets\" -Recurse
+Copy-Item presets\confirm-first "$env:USERPROFILE\.dsh\.agent-presets\" -Recurse
+```
+
+> 注意：`.agent-presets` 实际路径以 DSH 安装的 `<dshHome>` 为准。
+
+**方式二：插件市场（随附 preset）**
+
+安装本插件包（`dsh-from-scratch`）后，经 `cordis.patch.yml` 将本包 `presets/` 目录注册为 preset root（`trust: system`），两个场景自动出现在名单。
+
+> ⚠️ 插件壳注册逻辑待验证阶段实测调通（见 [cordis.patch.yml](cordis.patch.yml) 注释）。
+
+## 使用
+
+**场景「从零开始」**：DSH 新建会话选择 → 确认工作区 → git → 骨架 → 六步访谈 → 冻结 → spec 初版终稿 → 任务拆分初稿 → 推送。场景结束后，执行/验收由后续会话基于 `Reference/spec.md` + `Reference/tasks.md` 进行。
+
+**场景「先等等，让我确认一下」**：新建会话选择 → 二选一：① 提交初版方案完善成档；② 修改进行中项目的方案与目标（spec 版本递增 + 变更记录显式化）。

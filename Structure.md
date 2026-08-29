@@ -11,7 +11,7 @@ DSH 插件「AI 产品创建对齐」：场景模式插件，解决 AI 从零创
 
 ```
 DSH-Project Initialization/
-├── README.md         自述：愿景、说明、文档目录
+├── README.md         自述：愿景、说明、文档目录 + 双通道安装
 ├── LICENSE           Apache-2.0
 ├── Rules.md          项目规范
 ├── Structure.md      本文档
@@ -23,6 +23,19 @@ DSH-Project Initialization/
 │   └── IDEA.md       需求理解（v0.2 草案）
 ├── .gitignore        git 忽略规则
 ├── .gitattributes    换行符规范（统一 LF）
+├── ── 插件本体（presets/，agent-presets root）──
+├── presets/
+│   ├── from-scratch/         场景「从零开始」
+│   │   ├── agent.cordis.yml  工具白名单（宿主行引用）+ 场景人设
+│   │   ├── preset.yml        元数据：显示名「从零开始」
+│   │   ├── skills/           scaffold / interview / freeze / task-split
+│   │   └── assets/           默认骨架模板（7 个 .tpl，占位符版）
+│   └── confirm-first/        场景「先等等，让我确认一下」
+│       ├── agent.cordis.yml  工具白名单（同款）+ 场景人设
+│       ├── preset.yml        元数据：显示名「先等等，让我确认一下」
+│       └── skills/           polish（双子场景：初版完善/变更目标）
+├── package.json      薄插件壳（dsh bundle manifest）
+├── cordis.patch.yml  插件壳注册（presets/ root，待实测）
 └── .git/
 ```
 

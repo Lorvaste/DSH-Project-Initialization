@@ -11,8 +11,8 @@
 | 0. 需求澄清访谈 | complete | 5 轮访谈 + plan.md 结构规范 + 5 项裁决 |
 | 1. 需求理解冻结 | in_progress | 确认 Reference/IDEA.md v0.2（含待确认清单）后冻结为 v1.0 |
 | 2. 产品设计 | pending | 问答流程（六步）、规格结构、脚手架模板细化 |
-| 3. 技术方案 | pending | 场景模式实现：工具白名单、skill 规范、流程状态机、插件打包 |
-| 4. 插件实现 | pending | 按 MVP 边界实现（工作区/git/骨架/访谈/冻结/文档推送）|
+| 3. 技术方案 | complete | 场景模式实现方案：agent preset 载体、工具白名单、skill 规范、流程状态机、插件壳 |
+| 4. 插件实现 | in_progress | preset 文件已创建（agent.cordis.yml/preset.yml/4 skill/assets 模板/薄插件壳）；待验证阶段实测插件壳注册 |
 | 5. 验证 | pending | 本地安装测试、端到端走一遍从零流程 |
 | 6. 开源分发 | pending | GitHub 仓库 + 插件市场发布、文档 |
 
@@ -25,8 +25,12 @@
 - [x] 用户提供 plan.md（项目结构规范：两路径、三场景、通用骨架、软件/硬件子结构）
 - [x] 5 项裁决：先通用骨架后类型结构 / 软件有则生成 / 进行中包含产物对照 / 文件按建议并入 / plan.md 既是模板也自举
 - [x] 按新结构自举本仓库（文件重组完成）
+- [x] 设计定案：问答六步/规格结构/tasks 功能域/状态机/分发/验收移出范围（57 条决策）
+- [x] 实现 preset「从零开始」：agent.cordis.yml + preset.yml + skills（scaffold/interview/freeze/task-split）+ assets 模板（7 个）+ 薄插件壳（package.json/cordis.patch.yml）
 
 ## 下一步
 
-- [ ] 用户确认 Reference/IDEA.md v0.2 及待确认清单 → 冻结需求 v1.0
-- [ ] 阶段 2 产品设计：问答流程（六步）、规格结构、脚手架模板
+- [ ] 验证阶段：实测插件壳注册（cordis.patch.yml roots 合并语义）
+- [ ] 端到端走一遍从零流程（本仓库或新项目）
+- [ ] 用户确认 Reference/IDEA.md v0.2 → 冻结 v1.0
+- [ ] 远端推送（需权限升级）
