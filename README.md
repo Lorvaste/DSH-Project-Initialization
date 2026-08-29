@@ -47,7 +47,7 @@ Copy-Item presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets
 
 安装插件包（`dsh-project-initialization`）后，`cordis.patch.yml` 会把 `presets/` 注册为 preset root（`trust: system`），两个场景自动出现在名单。
 
-> ⚠️ 已知限制：插件壳注册（cordis.patch.yml 的 roots 合并）尚未在真实环境实测，手动复制安装（方式一）已验证可用。
+> ✅ 已实测：安装插件包后，宿主启动时自动把 presets/ 同步到 `.agent-presets`（幂等，与手动复制等效）。
 
 ### 使用
 

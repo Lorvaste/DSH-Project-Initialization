@@ -1,11 +1,21 @@
 {
   "name": "dsh-project-initialization",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "DSH 插件「产品创建对齐」（DSH-Project-Initialization）：双 agent preset 场景——「从零开始」（from-scratch）+「先等等，让我确认一下」（confirm-first），问答六步 + 规格冻结，让 AI 从零做产品每一步对齐你的想法。",
   "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json",
+    "./presets/*": "./presets/*"
+  },
   "files": [
     "cordis.patch.yml",
-    "presets"
+    "presets",
+    "src"
   ],
   "license": "Apache-2.0",
   "keywords": [
@@ -15,6 +25,9 @@
     "product-creation",
     "spec-driven"
   ],
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

@@ -1,18 +1,9 @@
-# 薄插件壳：场景 preset 随附注册
+# 插件壳：启动时把包内 presets/ 同步到用户 .agent-presets
 #
-# 机制：向 dsh-agent-presets 的 roots 追加本包 presets/ 目录（trust: system），
-# 使 preset「from-scratch」（从零开始）与「confirm-first」（先等等，让我确认一下）
-# 出现在 preset 名单（root 扫描目录下每个子目录为一个 preset）。
-#
-# ⚠️ 已知限制（尚未在真实环境实测）：
-#   1. insert 同名 id 与宿主既有 agent-presets 行的合并语义
-#   2. roots 的 path 相对/绝对解析（本包安装目录）
-#   3. trust: system 的权限语义
-# 如配置合并不生效，改为插件代码动态注册（API 以 cordis_inspect_list 实测为准）。
+# 官方第三方 preset 插件范式（参照 @linxin666/dsh-liangshen）：
+# 不配置 agent-presets roots（roots 的 path 按进程 cwd 解析，相对路径会错位），
+# 改为插件代码启动同步——包内 presets/ 幂等复制到 <dshHome>/.agent-presets/。
+# 手动复制安装（INSTALL.md 方式一）与插件同步等效，两种方式可共存。
 - insert:
     - id: project-alignment
-      name: '@deepseek-ai/dsh-agent-presets'
-      config:
-        roots:
-          - path: ./presets
-            trust: system
+      name: 'dsh-project-initialization'

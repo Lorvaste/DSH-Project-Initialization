@@ -43,9 +43,9 @@ Copy-Item presets\confirm-first $presets -Recurse
 
 ### 方式二：插件市场（随附 preset）
 
-安装 npm 包 `dsh-project-initialization` 后，经 `cordis.patch.yml` 将 `presets/` 注册为 preset root（`trust: system`），两个场景自动出现在名单。
+安装 npm 包 `dsh-project-initialization`（加入 DSH profile 依赖 + bundles 列表）后，宿主启动时插件壳自动把包内 `presets/` 同步到 `.agent-presets`，两个场景自动出现在名单（已验证）。
 
-> ⚠️ 已知限制：插件壳注册（roots 合并语义）尚未在真实环境实测；手动复制（方式一）已验证可用。
+> ✅ 已实测：插件壳注册生效——宿主启动时自动把包内 presets/ 同步到 `.agent-presets`（幂等复制），与手动复制等效；插件更新后重启即同步。
 
 ## 第三步：验证安装
 
