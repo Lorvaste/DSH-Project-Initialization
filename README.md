@@ -2,6 +2,8 @@
 
 AI 产品创建对齐插件。
 
+[English](README.en.md)
+
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue) ![DSH](https://img.shields.io/badge/dsh-agent--preset-ready-green) ![Platform](https://img.shields.io/badge/platform-DSH%20Desktop-blueviolet)
 
 ---
@@ -74,6 +76,7 @@ Copy-Item presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets
 │   ├── from-scratch/       场景「从零开始」：agent.cordis.yml + 4 个 skill + assets 模板
 │   └── confirm-first/      场景「先等等，让我确认一下」：agent.cordis.yml + polish skill
 ├── INSTALL.md              安装指引（目录定位/更新/卸载/常见问题）
+├── CONTRIBUTING.md         贡献指南
 ├── Reference/
 │   └── project-structure.md   项目结构规范参考
 ├── Rules.md                项目规范（骨架生成文件母版）

@@ -2,6 +2,8 @@
 
 DSH 插件「产品创建对齐」（`DSH-Project-Initialization`）的完整安装、更新与卸载说明。
 
+[English](INSTALL.en.md)
+
 ---
 
 ## 前置条件

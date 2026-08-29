@@ -6,8 +6,10 @@
 
 ```
 DSH-Project Initialization/
-├── README.md         自述：愿景、特性、双场景、安装、使用
+├── README.md / README.en.md     自述（中/英）：愿景、特性、双场景、安装、使用
 ├── LICENSE           Apache-2.0
+├── INSTALL.md / INSTALL.en.md   安装指引（中/英）：目录定位/更新/卸载/常见问题
+├── CONTRIBUTING.md / CONTRIBUTING.en.md   贡献指南（中/英）
 ├── Reference/
 │   └── project-structure.md 项目结构规范参考
 ├── Rules.md          项目规范（骨架生成文件母版）
