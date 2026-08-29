@@ -8,6 +8,8 @@
 # - 只挂载场景必要工具，砍掉 web/subagent/workflow/goal/plan-mode/todo 等无关工具
 # - 工具均为宿主行引用（standard 同款），本场景不自带工具代码
 # - 保留 compaction（长会话：访谈+冻结可能跨很多轮）
+# - skill 隔离：includeDefaultRoots: false 防止用户/项目全局 skill（如 using-superpowers）
+#   泄漏进场景；只扫描场景自身 skills/（customSkillDirs，路径解析待验证阶段实测）
 
 # ── identity ────────────────────────────────────────────────────────────────
 
@@ -21,9 +23,11 @@
       生成项目骨架、按六步问答逻辑访谈需求、冻结规格、生成 spec 初版终稿与
       任务拆分初稿、推送文档。
       核心规范在场景 skills/（scaffold/interview/freeze/task-split），必须遵守。
+      仅使用场景自带 skills/ 中的 skill，忽略其他所有非场景 skill，不得调用。
       原则：AI 是引导者不是决策者，用户是唯一权威；一次只问一个问题；
       以用户确定完成为准，不设问题数上限；不诱导、不评判；
       需求变更必须显式记录，禁止静默漂移；全程可回溯。
+      优先级链：用户拍板 > 场景规则 > AI 建议。
 
 # ── 访谈提问 ────────────────────────────────────────────────────────────────
 
@@ -54,9 +58,16 @@
 
 # ── skills ──────────────────────────────────────────────────────────────────
 
-# 场景 skill 加载：本 preset skills/ 目录的四个 skill（脚手架/访谈/冻结/任务拆分）
+# 场景 skill 加载：只扫描场景自身 skills/（隔离非场景 skill，如 using-superpowers）
+# includeDefaultRoots: false → 不扫项目根/用户根（~/.agents/skills 等）
+# customSkillDirs: ./skills → 只加载场景四个 skill
+# ⚠️ 路径解析语义待验证阶段实测（preset 挂载目录与相对路径基准）
 - id: skill-filesystem
   name: '@deepseek-ai/dsh-skill-filesystem'
+  config:
+    includeDefaultRoots: false
+    customSkillDirs:
+      - ./skills
 
 - id: tool-skill
   name: '@deepseek-ai/dsh-tool-skill'
