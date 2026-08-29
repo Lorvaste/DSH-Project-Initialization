@@ -28,9 +28,11 @@
 {{/SCENE_TYPE}}
 ```
 
+{{#SCENE_TYPE}}
 ## 场景类型
 
 {{SCENE_TYPE_DETAIL}}
+{{/SCENE_TYPE}}
 
 ## 流程路径
 

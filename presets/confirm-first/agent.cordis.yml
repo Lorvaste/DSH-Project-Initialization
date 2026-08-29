@@ -7,7 +7,7 @@
 # 场景灵魂：每一步先停下来确认（复述核对/变更确认）——对齐机制的本质。
 #
 # 工具白名单与 from-scratch 同款（省 token）：ask-user/fs/fs-search/bash|pwsh/skill/compaction。
-# 成档逻辑复用 from-scratch 的 freeze/task-split（spec/tasks 结构共用）。
+# 成档结构（spec/tasks）内嵌于 polish skill（自包含）；"复用"指结构同源，非 skill 依赖。
 
 # ── identity ────────────────────────────────────────────────────────────────
 

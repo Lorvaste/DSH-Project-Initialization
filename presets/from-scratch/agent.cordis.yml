@@ -1,8 +1,8 @@
 # The `from-scratch` agent preset: 场景「从零开始」——产品创建对齐
 #
 # 本 preset 是 DSH-Project-Initialization 插件（AI 产品创建对齐）的场景载体。
-# 会话命名本 preset 后获得：最小工具白名单（ask-user/fs/bash）+ 四个场景 skill
-# （scaffold/interview/freeze/task-split）+ 场景人设。
+# 会话命名本 preset 后获得：最小工具白名单（ask-user/fs/fs-search/bash|pwsh/skill-filesystem/tool-skill/compaction）
+# + 四个场景 skill（scaffold/interview/freeze/task-split）+ 场景人设。
 #
 # 设计原则（省 token）：
 # - 只挂载场景必要工具，砍掉 web/subagent/workflow/goal/plan-mode/todo 等无关工具

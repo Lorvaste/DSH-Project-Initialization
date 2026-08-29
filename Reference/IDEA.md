@@ -82,9 +82,9 @@ AI 辅助开发把这套纪律压缩成了「一句话想法 → 直接产出」
 DSH-Project Initialization/（仓库根）
 ├── presets/                 ← agent-presets root（扫描目录）
 │   ├── from-scratch/        ← 场景「从零开始」
-│   │   ├── agent.cordis.yml / preset.yml / skills/ / assets/
+│   │   ├── agent.cordis.yml / preset.yml / LICENSE / skills/ / assets/
 │   └── confirm-first/        ← 场景「先等等，让我确认一下」
-│       ├── agent.cordis.yml / preset.yml / skills/
+│       ├── agent.cordis.yml / preset.yml / LICENSE / skills/
 ├── README.md / LICENSE / plan.md / Rules.md / Structure.md / Progress.md / Other/ / Reference/   ← 项目文档
 ├── .gitignore / .gitattributes / .git
 ├── package.json             ← 薄插件壳
@@ -123,20 +123,20 @@ DSH-Project Initialization/（仓库根）
 
 ```
 确认工作区 → git 初始化 → ssh 链接远端（可选，ssh 最稳定）
-→ 初始化项目结构（通用骨架）并保存
+→ 初始化项目结构（默认骨架 9+2 项）并保存
 → 需求问答（访谈，确定类型/规模）
-→ 生成类型子结构（软件/硬件，有则生成）
+→ 生成类型子结构（scaffold 阶段二，软件/硬件有则生成）
 → 整理统合需求 + 用户确认（规格冻结）
+→ spec 初版终稿（Reference/spec.md）
+→ 任务拆分初稿（Reference/tasks.md，按功能域）
 → 结构化编写文档并保存推送
-→ 任务分解 + 追溯（v1.1）
-→ 执行（每步对照规格）
-→ 验收（逐条对照，v1.1）
+→ 场景结束（执行/验收交后续会话，不在插件范围）
 ```
 
 | 阶段 | 做什么 | 产出物 | 防什么偏差 |
 |---|---|---|---|
 | 工作区+git+ssh | 确认工作区、git init、ssh 远端（可选） | git 仓库 | 变更不可追踪 |
-| 通用骨架 | 初始化 9 项共有结构并保存 | README/LICENSE/Rules/Structure/Progress/plan/Other/Reference/.git | 无地基 |
+| 通用骨架 | 初始化 9+2 项共有结构并保存 | README/LICENSE/Rules/Structure/Progress/plan/Other/Reference/.git + .gitignore/.gitattributes | 无地基 |
 | 需求问答 | 结构化访谈（自适应深度），确定类型/规模 | 需求说明书 | 需求模糊、没说清楚 |
 | 类型子结构 | 按类型生成软件/硬件子文件夹（有则生成） | Frontend/Backend/Database、Model/电路/嵌入式 | 结构错位 |
 | 规格冻结 | **AI 复述完整需求 → 用户逐条确认 → 冻结** | 规格文档（四类规格） | AI 理解偏、隐式假设 |
@@ -168,7 +168,7 @@ DSH-Project Initialization/（仓库根）
 - ssh 链接远端（用户可选；ssh 最稳定，https 需 token 管理）
 - `.gitignore`、`README.md` 生成
 - 提交规范（Conventional Commits：feat/fix/docs/chore/refactor 前缀）
-- 每个里程碑文档保存并推送远端
+- 每个里程碑文档保存并 commit；场景结束（docs-push）才推送远端（push 可选）
 - ⚠️ 环境事实：DSH 沙箱内 git push 的 ssh 管道会被拦截，需权限升级（插件需处理）
 
 ### 3.5 访谈机制与准则（定案，内化到场景模式）
@@ -392,7 +392,7 @@ Embedded/             嵌入式开发相关文件
 - **追溯矩阵**：需求条目 ↔ 任务 ↔ 产物 ↔ 验收项 映射，防漂移核心数据结构
 - **双通道检查**：产物 vs 规格，AI 自动初检 + 人工确认终检
 - **脚手架生成器（模板化方案已定案）**：
-  - **默认骨架**：skill 内置 templates/ 模板直接产出（含 `{{PROJECT_NAME}}`/`{{REMOTE_URL}}`/`{{AUTHOR_NAME}}` 占位符，生成时替换），规则固化在 skill 内
+  - **默认骨架**：skill 内置 assets/ 模板直接产出（含 `{{PROJECT_NAME}}`/`{{REMOTE_URL}}`/`{{PROJECT_VISION}}`/`{{LICENSE_NAME}}`/`{{SCENE_TYPE}}`/`{{SCENE_TYPE_DETAIL}}`/`{{CURRENT_STAGE}}`/`{{CURRENT_STAGE_DESC}}` 占位符与 `{{#KEY}}` 条件块，生成时替换），规则固化在 skill 内
   - **其他骨架**：skill 读取项目 Rules.md 第四章，按 4.1 场景判定 → 4.2（软件）/4.3（实体）/4.4（复合）对应规则生成
   - **规则源**：项目 Rules.md 即为规则源（第四章）
   - **项目内优先**：生成后用户可修改 Rules.md，skill 下次运行以项目内文件为准，不覆盖用户修改
@@ -440,7 +440,7 @@ Embedded/             嵌入式开发相关文件
 | 15 | 分发：GitHub + 插件市场双渠道 | 访谈 3 |
 | 16 | 三类场景：纯软件/纯实体/复合 | plan.md |
 | 17 | 两条进入路径：项目刚开始/项目进行中 | plan.md |
-| 18 | 通用骨架 9 项共有结构 | plan.md |
+| 18 | 通用骨架 9 项共有结构（后被 26 补漏为 9+2 项：+.gitignore/.gitattributes）| plan.md |
 | 19 | 顺序：先通用骨架 → 访谈 → 类型子结构 | 裁决：先通用骨架，访谈后补类型结构 |
 | 20 | 软件子结构「有则生成」 | 裁决 |
 | 21 | 进行中路径包含产物对照（偏差清单）| 裁决 |
@@ -459,13 +459,13 @@ Embedded/             嵌入式开发相关文件
 | 34 | 场景范围 = 从零流程前段 + 初稿任务拆分；执行/验收交后续会话 | 用户定案 |
 | 35 | 场景实现 = DSH agent preset 官方机制 | 技术确认 |
 | 36 | 场景显示名「从零开始」，preset id `from-scratch` | 用户定案 |
-| 37 | 工具白名单三族：ask-user / fs / bash（git）| 裁决 |
+| 37 | 工具白名单三族：ask-user / fs / bash（git）（实现扩展：+fs-search/pwsh 二选一/skill-filesystem/tool-skill/compaction）| 裁决 |
 | 38 | 场景入口 = 新建会话选 preset | 裁决 |
 | 39 | 权限 = workspace-write+ask，git push 沙箱拦截引导升级 | 裁决 |
 | 40 | 访谈提问用 dsh-tool-ask-user（原生选项/多选 UI）| 裁决 |
 | 41 | 规格条目编号 F/D/R/I 前缀体系（追溯锚点）| 裁决 |
 | 42 | 功能规格不设优先级 | 裁决 |
-| 43 | 验收要点可选，由用户决定是否填写 | 用户定案 |
+| 43 | 验收要点可选，由用户决定是否填写（后被 57 取代：spec 移除验收要点字段）| 用户定案 |
 | 44 | 任务拆分单独文件 Reference/tasks.md | 裁决 |
 | 45 | 实体规格单独结构（v2 设计）| 裁决 |
 | 46 | 功能域在问答④确认（用户理解的功能域划分）| 裁决 |
@@ -475,7 +475,7 @@ Embedded/             嵌入式开发相关文件
 | 50 | 回退机制：任意状态可回退到之前任意状态 | 裁决 |
 | 51 | 流程状态记录到 Progress.md（可恢复续跑）| 裁决 |
 | 52 | 交付双通道：preset 目录（GitHub 手动）+ 薄插件壳（市场）| 裁决 |
-| 53 | 仓库即 preset（一个仓库一个场景）| 裁决 |
+| 53 | 仓库即 preset（后被 58 取代：presets/ 多场景目录）| 裁决 |
 | 54 | 场景工具宿主行引用，不自带工具代码 | 裁决 |
 | 55 | 项目/仓库名维持 `DSH-Project-Initialization`（用户定案）；preset id `from-scratch`；显示名「从零开始」| 定案 |
 | 56 | **验收流程不在插件范围**（执行/验收交场景外后续会话，插件不实现验收流程与验收格式设计）| 用户指定 |

@@ -18,11 +18,11 @@ description: 场景「从零开始」的脚手架阶段：确认工作区、git 
 ### 2. git 初始化（状态：git-init）
 
 - 在确认的工作区执行 `git init -b main`（明确默认分支 main，与环境默认无关；已存在的仓库跳过）
-- **git 身份配置（关键步骤）**：确认本地 git 身份已配置，未配置则询问用户并执行：
+- **git 身份配置（关键步骤，刚性）**：确认 git 身份可用（项目级或全局均可），不可用则询问用户并配置项目级：
   - `git config user.name "<用户名>"`
   - `git config user.email "<邮箱>"`
-  - （项目级配置即可，勿改全局；身份值同时用于占位符替换 {{AUTHOR_NAME}}/{{AUTHOR_EMAIL}}）
-- 闸门：`git init` 成功 + 身份已配置（或用户明确选择不配置）→ 进入下一步
+  - （项目级配置即可，勿改全局）
+- 闸门：`git init` 成功 + git 身份可用（初始提交前必须有身份）→ 进入下一步
 - ⚠️ 环境事实（条件式）：若报 dubious ownership（Windows 下常见，目录属主与当前用户不一致），用 `git -c safe.directory="<路径>" <cmd>` 逐命令绕过，勿改全局配置
 
 ### 3. ssh 远端（可选，状态：git-remote）
@@ -41,8 +41,6 @@ description: 场景「从零开始」的脚手架阶段：确认工作区、git 
 | `{{PROJECT_NAME}}` | 项目名（取自工作区目录名，或询问用户）|
 | `{{PROJECT_VISION}}` | 项目愿景一句话 |
 | `{{REMOTE_URL}}` | ssh 远端地址（无则替换为空串）|
-| `{{AUTHOR_NAME}}` | git 本地身份名（步骤 2 已配置）|
-| `{{AUTHOR_EMAIL}}` | git 本地身份邮箱（步骤 2 已配置）|
 | `{{LICENSE_NAME}}` | 开源协议名（默认 Apache-2.0）|
 | `{{SCENE_TYPE}}` | 场景类型（访谈后填入；**初始替换为空串**——条件块依赖空值隐藏）|
 | `{{SCENE_TYPE_DETAIL}}` | 场景类型说明（访谈后补）|
