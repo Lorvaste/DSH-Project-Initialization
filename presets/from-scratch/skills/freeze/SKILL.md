@@ -27,7 +27,7 @@ description: 场景「从零开始」的规格冻结与成档：AI 结构化复�
 
 ### 3. 生成 spec.md 初版终稿
 
-写入 `Reference/spec.md`，结构（3.6 定案）：
+写入 `Reference/spec.md`，结构（按本 skill 内嵌模板）：
 
 ```markdown
 # spec.md — 项目规格（vX.Y 冻结）
@@ -62,11 +62,11 @@ description: 场景「从零开始」的规格冻结与成档：AI 结构化复�
 
 - 每段附功能域归属（MOD-xx），汇总为 spec §0 功能域清单（域↔条目映射的权威载体）
 - 条目编号：F/D/R/I 前缀 + 序号（追溯锚点）；状态冻结时全部「已确认」
-- 实体产品规格：单独结构（v2，暂不生成）
+- 实体产品规格：单独结构（规划中；硬件补丁清单见 interview skill）
 
 ### 4. 闸门与收尾
 
-- 闸门：spec.md 初版终稿写入 Reference/ 且内容与确认一致 → 进入任务拆分（task-split skill）
+- 闸门：spec.md 初版终稿写入 Reference/ 且内容与确认一致\n- **里程碑提交**：`git commit -m "docs: spec vX.Y 初版终稿"`（3.1 里程碑提交规则）\n- 进入任务拆分（task-split skill）
 - 冻结后变更：显式记录到 spec 变更记录 + Progress.md，禁止静默漂移
 - 状态写入 Progress.md
 
@@ -83,7 +83,7 @@ description: 场景「从零开始」的规格冻结与成档：AI 结构化复�
 
 - **刚性（Rigid，必须执行）**：逐条确认（已确认/待定/驳回）/ 未确认不入 spec / 变更记录显式化
 - **弹性（Flexible，适配原则）**：条目措辞方式、spec 细节详略（以用户确定完成为准）
-- **优先级链**：用户拍板 > 场景规则 > AI 建议
+- **优先级链**：用户拍板 > 全局规则 > 域内规则 > 场景规则（完整链见 Rules.md 0.1）
 
 ## 工程准则
 

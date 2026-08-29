@@ -45,7 +45,7 @@
 - LICENSE      开源协议
 - Rules.md     项目规范：语言偏好、上下文规则、开发规则、术语标准
 - Structure.md 项目内容：结构化信息
-- Progress.md  项目进度（内部维护，不随公开仓库提交）
+- Progress.md  项目进度（随项目提交）
 - plan.md      开发计划：开发规划、验收规则
 - Other/       其他内容：决策思路等
 - Reference/   参考文件（含冻结后规格文档 spec.md、任务拆分 tasks.md）

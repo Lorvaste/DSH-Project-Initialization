@@ -22,7 +22,7 @@ description: 场景「从零开始」的任务拆分：按用户理解的功能�
 
 ### 3. 生成 tasks.md
 
-写入 `Reference/tasks.md`，结构（3.6 定案）：
+写入 `Reference/tasks.md`，结构（按本 skill 内嵌模板）：
 
 ```markdown
 # tasks.md — 任务拆分（初稿）
@@ -84,7 +84,7 @@ Reference/domains/MOD-01/
 
 - **刚性（Rigid，必须执行）**：按功能域组织 / 追溯链标注 / tasks.md 用户确认
 - **弹性（Flexible，适配原则）**：任务粒度（用户定）/ 初稿详略
-- **优先级链**：用户拍板 > 场景规则 > AI 建议
+- **优先级链**：用户拍板 > 全局规则 > 域内规则 > 场景规则（完整链见 Rules.md 0.1）
 
 ## 工程准则
 

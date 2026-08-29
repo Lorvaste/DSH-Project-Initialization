@@ -3,10 +3,11 @@ node_modules/
 dist/
 build/
 *.tgz
-npm-debug.log*`n*.log
+npm-debug.log*
+*.log
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*`n*.log
+pnpm-debug.log*
 
 # 编辑器/IDE
 .vscode/

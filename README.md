@@ -42,12 +42,12 @@ Copy-Item presets\confirm-first "$env:USERPROFILE\.dsh\.agent-presets\" -Recurse
 
 安装插件包（`dsh-from-scratch`）后，`cordis.patch.yml` 会把 `presets/` 注册为 preset root（`trust: system`），两个场景自动出现在名单。
 
-> ⚠️ 插件壳注册逻辑待验证阶段实测调通（见 [cordis.patch.yml](cordis.patch.yml)）。
+> ⚠️ 已知限制：插件壳注册（cordis.patch.yml 的 roots 合并）尚未在真实环境实测，手动复制安装（方式一）已验证可用。
 
 ### 使用
 
 1. DSH 新建会话，选一个场景
-2. **从零开始**：确认工作区 → git → 骨架 → 六步访谈 → 冻结 → 规格初稿 + 任务拆分 → 推送
+2. **从零开始**：确认工作区 → git → 骨架 → 问答六步 → 冻结 → 规格初稿 + 任务拆分 → 推送
 3. **先等等，让我确认一下**：提交初版方案完善成档，或改进行中项目的方案和目标
 
 ### 验证安装

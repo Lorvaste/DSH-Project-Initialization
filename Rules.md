@@ -35,7 +35,7 @@
 
 | 规则域 | 唯一权威 | 引用方式 |
 |---|---|---|
-| git 规则 | 本文件 3.1 | 场景 skill 执行时按本文件执行，不在 skill 内重复定义 |
+| git 规则 | 本文件 3.1 | 规则定义以 3.1 为准；skill 内可含操作性回显（具体命令步骤），不改变规则定义 |
 | 结构规则（骨架/子结构）| 本文件第四章（生成条件与边界）+ plan.md 第一部分（结构清单）| 两文件互补：plan.md 列清单，本文件第四章定生成规则 |
 | 文档结构（spec/tasks）| 场景 skill 内嵌模板（freeze/task-split/polish）| 生成产物以 skill 模板为准 |
 | 访谈机制与准则 | 场景 skill（interview）| 本文件不承载（见第 0 章分工）|
@@ -73,13 +73,13 @@
 - 主干即 `main`，不建长期并行分支（单会话流程）
 
 **忽略与属性**
-- `.gitignore` 必备：node_modules/dist/构建产物/编辑器/系统文件/密钥凭据（`.env`/`*.pem`/`*.key`/`*.pfx`/`*.p12`/`credentials*`/`id_rsa`/`id_ed25519`）/内部文档
+- `.gitignore` 必备：node_modules/dist/构建产物/编辑器/系统文件/密钥凭据（`.env`/`*.pem`/`*.key`/`*.pfx`/`*.p12`/`*.jks`/`credentials*`/`id_rsa`/`id_ed25519`）/内部文档
 - `.gitattributes`：统一 LF（`* text=auto` + 文档/代码扩展名 `eol=lf`），防 Windows CRLF 漂移
 
 **提交**
 - 提交规范：Conventional Commits——`<type>(<scope>): <subject>`，type ∈ `feat`/`fix`/`docs`/`chore`/`refactor`/`test`/`style`/`build`/`perf`
 - 每个里程碑一个提交（脚手架、类型子结构、规格冻结、任务拆分、最终复核）
-- 内部文件（开发进度/决策记录/访谈）不提交——git 例外（.gitignore 声明）
+- 内部文档 git 例外（.gitignore 声明）：决策记录/访谈原始记录（如 Other/interview.md、Other/findings.md、Reference/IDEA.md）；骨架文档（plan.md/Progress.md）随项目提交
 
 **推送**
 - 场景结束（docs-push）才推送远端，push 可选
@@ -194,7 +194,7 @@ Reference/domains/MOD-01/          域骨架（一套文档）
 | 场景 | agent preset（DSH 原生机制）：目录含 agent.cordis.yml，决定会话的工具、提示词与 skill |
 | 从零开始 | 场景一（preset id `from-scratch`）：没思路吗，从问答到确认试试——想法 → 规格初稿 + 任务拆分 |
 | 先等等，让我确认一下 | 场景二（preset id `confirm-first`）：感觉不对劲，要不复核理解再确认一下——初稿完善 / 方案变更 |
-| 工具白名单 | 场景只挂必要工具（ask-user/fs/bash），省 token |
+| 工具白名单 | 场景只挂必要工具（ask-user/fs/bash 等，按场景需要挂载），省 token |
 
 ### 流程
 
@@ -202,11 +202,11 @@ Reference/domains/MOD-01/          域骨架（一套文档）
 |---|---|
 | 问答六步 | 想做什么 → 功能实现范围 → 细则确认（一次一问）→ 结构化拆分与确认 → 遍历性验证 → 确认成档 |
 | 规格冻结 | AI 复述完整需求 → 用户逐条确认 → 冻结为权威文档（spec.md）|
-| 遍历性检查 | 三层遍历（目标/域/条目）+ 七维度 + 领域遗漏模板；可审计报告 + 影响面复验 |
+| 遍历性验证 | 三层遍历（目标/域/条目）+ 七维度 + 领域遗漏模板；可审计报告 + 影响面复验 |
 | 功能域 | 用户理解的产品功能划分（问答④确认，MOD-xx）|
 | 域开发骨架 | 可选功能：每域一套文档（Reference/domains/MOD-xx/），全局规则裁剪 + 域内细化，用户决定启用 |
 | 任务拆分 | 按功能域组织任务（MOD-xx-Tyy），标注关联规格与落点 |
-| 对齐点 | 流程中显式检查理解一致性的环节（冻结、核对、确认）|
+
 
 ### 文档与结构
 
@@ -232,4 +232,4 @@ Reference/domains/MOD-01/          域骨架（一套文档）
 | skill 隔离 | 场景只加载自身 skill（includeDefaultRoots:false + baseUrl 范式）|
 | git 例外 | 本地保留、不随公开仓库提交的文件（.gitignore 声明，如内部文档/密钥凭据）|
 | 追溯矩阵 | 需求条目 ↔ 任务 ↔ 产物 ↔ 验收项的映射 |
-| 偏差清单 | 产物对照：符合/偏离/缺失 三类问题的逐项列表 |
+| 偏差清单 | 产物对照：符合/偏离/缺失 三类问题的逐项列表 |\n| 压缩版遍历检查 | 变更场景的简化遍历：输入/异常/边界/数据/环境 + 可验证性 + 歧义性 + 依赖闭环（polish 子场景②）|

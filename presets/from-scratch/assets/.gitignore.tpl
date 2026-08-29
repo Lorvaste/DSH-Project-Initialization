@@ -31,6 +31,11 @@ credentials*
 id_rsa
 id_ed25519
 
+# 内部文档（git 例外，不随仓库提交——Rules.md 3.1：决策记录/访谈原始记录）
+Other/interview.md
+Other/findings.md
+Reference/IDEA.md
+
 # DSH 本地
 *.local
 .hmr/
