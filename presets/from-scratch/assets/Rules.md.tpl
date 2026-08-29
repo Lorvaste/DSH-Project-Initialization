@@ -38,9 +38,39 @@
 ## 3. 开发规则
 
 - 遵循 **SDD**：先规格后实现
-- 提交规范：Conventional Commits（`feat`/`fix`/`docs`/`chore`/`refactor` 前缀）
-- 每个里程碑完成：文档保存 + git 推送远端
+- 每个里程碑完成：文档保存 + git 提交
 - 先搭骨架后填充：默认骨架 → 访谈 → 其他骨架（类型子结构）
+
+### 3.1 git 规则
+
+**初始化与身份**
+- `git init -b main`（明确默认分支，与环境默认无关；已存在仓库跳过）
+- 身份配置：项目级 `git config user.name/user.email`，勿改全局；初始提交前必须有可用身份
+
+**分支**
+- 主干即 `main`，不建长期并行分支（单会话流程）
+
+**忽略与属性**
+- `.gitignore` 必备：node_modules/dist/构建产物/编辑器/系统文件/密钥凭据（`.env`/`*.pem`/`*.key`/`*.pfx`/`*.p12`/`credentials*`/`id_rsa`/`id_ed25519`）/内部文档
+- `.gitattributes`：统一 LF（`* text=auto` + 文档/代码扩展名 `eol=lf`），防 Windows CRLF 漂移
+
+**提交**
+- 提交规范：Conventional Commits——`<type>(<scope>): <subject>`，type ∈ `feat`/`fix`/`docs`/`chore`/`refactor`/`test`/`style`/`build`/`perf`
+- 每个里程碑一个提交（脚手架、类型子结构、规格冻结、任务拆分、最终复核）
+- 内部文件（开发进度/决策记录/访谈）不提交——git 例外（.gitignore 声明）
+
+**推送**
+- 场景结束（docs-push）才推送远端，push 可选
+- ssh 最稳定；沙箱内 ssh 管道被拦时引导权限升级
+- 推送前检查：无密钥、无内部文档、无未确认产物
+
+**环境坑（条件式）**
+- 若报 dubious ownership（Windows 常见：目录属主与当前用户不一致），用 `git -c safe.directory="<路径>" <cmd>` 逐命令绕过，勿改全局配置
+- 远端可达确认：`git ls-remote <url>`
+
+**安全**
+- 密钥与凭据永不提交（`.env`/`*.pem`/`*.key`/`*.pfx`/`*.p12`/`*.jks`/`credentials*`/`id_rsa`/`id_ed25519`）
+- 内部文档（开发日志/决策记录/访谈发现）git 例外，仅本地维护
 
 ---
 
@@ -127,3 +157,4 @@
 | 偏差清单 | 产物对照：符合/偏离/缺失 三类问题的逐项列表 |
 | 对齐点 | 流程中显式检查理解一致性的环节（冻结、核对、验收）|
 | 有则生成 | 访谈确认存在对应功能块才生成该子结构，不满足不生成 |
+| git 例外 | 本地保留、不随公开仓库提交的文件（.gitignore 声明，如内部文档/密钥凭据）|
