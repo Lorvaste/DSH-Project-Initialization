@@ -29,18 +29,23 @@ AI 产品创建对齐插件。
 
 ### 安装
 
+> 完整安装指引（目录定位/验证/更新/卸载/常见问题）见 **[INSTALL.md](INSTALL.md)**。
+
 **方式一：手动复制（零构建）**
 
 ```powershell
-Copy-Item presets\from-scratch  "$env:USERPROFILE\.dsh\.agent-presets\" -Recurse
-Copy-Item presets\confirm-first "$env:USERPROFILE\.dsh\.agent-presets\" -Recurse
+# 先删后复制，避免嵌套
+Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\from-scratch"  -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\confirm-first" -Recurse -Force -ErrorAction SilentlyContinue
+Copy-Item presets\from-scratch  "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
+Copy-Item presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
 ```
 
 > `.agent-presets` 实际路径以 DSH 安装的 `<dshHome>` 为准。
 
 **方式二：插件市场**
 
-安装插件包（`dsh-from-scratch`）后，`cordis.patch.yml` 会把 `presets/` 注册为 preset root（`trust: system`），两个场景自动出现在名单。
+安装插件包（`dsh-project-initialization`）后，`cordis.patch.yml` 会把 `presets/` 注册为 preset root（`trust: system`），两个场景自动出现在名单。
 
 > ⚠️ 已知限制：插件壳注册（cordis.patch.yml 的 roots 合并）尚未在真实环境实测，手动复制安装（方式一）已验证可用。
 
@@ -74,6 +79,7 @@ node tools/verify-runtime.js   # 校验 preset 结构、skill 发现与隔离配
 ├── presets/
 │   ├── from-scratch/       场景「从零开始」：agent.cordis.yml + 4 个 skill + assets 模板
 │   └── confirm-first/      场景「先等等，让我确认一下」：agent.cordis.yml + polish skill
+├── INSTALL.md              安装指引（目录定位/验证/更新/卸载/常见问题）
 ├── Reference/
 │   └── project-structure.md   项目结构规范参考
 ├── Rules.md                项目规范（骨架生成文件母版）

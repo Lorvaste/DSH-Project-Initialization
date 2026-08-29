@@ -1,7 +1,7 @@
 {
-  "name": "dsh-from-scratch",
+  "name": "dsh-project-initialization",
   "version": "0.1.0",
-  "description": "DSH agent preset「产品创建对齐」插件：场景「从零开始」（from-scratch，从零创建产品：工作区/git/骨架/问答六步/规格冻结/spec 初版终稿/任务拆分初稿/推送）+ 场景「先等等，让我确认一下」（confirm-first，初版方案完善 / 进行中项目修改方案与目标），解决 AI 产物与想法不一致。",
+  "description": "DSH 插件「产品创建对齐」（DSH-Project-Initialization）：双 agent preset 场景——「从零开始」（from-scratch）+「先等等，让我确认一下」（confirm-first），问答六步 + 规格冻结，让 AI 从零做产品每一步对齐你的想法。",
   "type": "module",
   "files": [
     "cordis.patch.yml",
