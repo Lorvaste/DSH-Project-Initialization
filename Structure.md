@@ -27,7 +27,8 @@ DSH-Project Initialization/
 ├── .gitattributes    换行符规范（统一 LF）
 ├── package.json      薄插件壳（dsh bundle manifest）
 ├── cordis.patch.yml  插件壳注册（presets/ root）
-└── verify-runtime.js 运行时验证脚本
+├── tools/
+│   └── verify-runtime.js 运行时验证脚本
 ```
 
 ## 两条路径（插件流程）
