@@ -1,6 +1,6 @@
 {
   "name": "dsh-project-initialization",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "DSH 插件「产品创建对齐」（DSH-Project-Initialization）：双 agent preset 场景——「从零开始」（from-scratch）+「先等等，让我确认一下」（confirm-first），问答六步 + 规格冻结，让 AI 从零做产品每一步对齐你的想法。",
   "type": "module",
   "main": "./src/index.js",
