@@ -49,6 +49,8 @@ description: 场景「从零开始」的脚手架阶段：确认工作区、git 
 
 **条件块语义**（`{{#KEY}}...{{/KEY}}`）：KEY 替换后为**非空**才渲染块内容；为空则整块隐藏。`{{#REMOTE_URL}}`（无远端则隐藏仓库信息行）、`{{#SCENE_TYPE}}`（访谈前为空则隐藏类型子结构段）必须按此语义处理，**不得**填入字面量 "待定"（真值会渲染错误内容）。
 
+**阶段二回填锚点**：渲染 Structure.md 时，在 `{{#SCENE_TYPE}}` 块位置保留注释锚点 `<!-- 类型子结构段：访谈确定场景类型后回填 -->`；块内容整块隐藏后无占位符可回填，锚点是阶段二（§6）的插入位置。
+
 模板清单（assets/ 目录）：
 
 ```
@@ -79,7 +81,7 @@ plan.md.tpl          → plan.md        （项目结构规范/开发规划/验�
   - 纯软件 → 4.2 软件子结构（有则生成：有前端才建 Frontend 等）
   - 纯实体 → 4.3 硬件子结构（有则生成：Model/电路/嵌入式）
   - 复合 → 4.4 软件+硬件组合
-- 生成后：更新 Structure.md 结构树 + **回填 SCENE_TYPE/SCENE_TYPE_DETAIL 占位符**（Structure.md 模板对应位置）+ git commit（"chore: 生成类型子结构"）
+- 生成后：更新 Structure.md 结构树 + **在阶段一保留的锚点处渲染场景类型段**（按 Structure.md.tpl 的 `{{#SCENE_TYPE}}` 块结构，填入实际 SCENE_TYPE/SCENE_TYPE_DETAIL）+ git commit（"chore: 生成类型子结构"）
 - 闸门：子结构符合第四章规则、Structure.md 已同步 → 进入冻结阶段（freeze skill）
 - ⚠️ 本阶段是阶段一的延续：默认骨架（访谈前）+ 类型子结构（访谈后）都在本 skill 职责内
 
