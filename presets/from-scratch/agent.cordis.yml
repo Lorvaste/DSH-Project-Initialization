@@ -59,15 +59,15 @@
 # ── skills ──────────────────────────────────────────────────────────────────
 
 # 场景 skill 加载：只扫描场景自身 skills/（隔离非场景 skill，如 using-superpowers）
-# includeDefaultRoots: false → 不扫项目根/用户根（~/.agents/skills 等）
-# customSkillDirs: ./skills → 只加载场景四个 skill
-# ⚠️ 路径解析语义待验证阶段实测（preset 挂载目录与相对路径基准）
+# - customSkillDirs 用官方 cordis preset 范式：baseUrl = preset 自身目录，
+#   随安装位置解析（相对 cwd 解析已被代码核实会导致 skill 全部不加载）
+# - includeDefaultRoots: false → 不扫项目根/用户根（~/.agents/skills 等）
 - id: skill-filesystem
   name: '@deepseek-ai/dsh-skill-filesystem'
   config:
     includeDefaultRoots: false
     customSkillDirs:
-      - ./skills
+      - !!js "process.getBuiltinModule('node:url').fileURLToPath(new URL('skills/', baseUrl))"
 
 - id: tool-skill
   name: '@deepseek-ai/dsh-tool-skill'

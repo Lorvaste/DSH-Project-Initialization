@@ -52,13 +52,13 @@
 # ── skills ──────────────────────────────────────────────────────────────────
 
 # 场景 skill 加载：只扫描场景自身 skills/（隔离非场景 skill，如 using-superpowers）
-# ⚠️ 路径解析语义待验证阶段实测
+# baseUrl = preset 自身目录（官方 cordis preset 范式，随安装位置解析）
 - id: skill-filesystem
   name: '@deepseek-ai/dsh-skill-filesystem'
   config:
     includeDefaultRoots: false
     customSkillDirs:
-      - ./skills
+      - !!js "process.getBuiltinModule('node:url').fileURLToPath(new URL('skills/', baseUrl))"
 
 - id: tool-skill
   name: '@deepseek-ai/dsh-tool-skill'

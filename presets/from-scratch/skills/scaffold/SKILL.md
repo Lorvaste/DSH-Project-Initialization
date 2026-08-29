@@ -17,29 +17,39 @@ description: 场景「从零开始」的脚手架阶段：确认工作区、git 
 
 ### 2. git 初始化（状态：git-init）
 
-- 在确认的工作区执行 `git init`
-- 已存在 git 仓库则直接通过
-- 闸门：`git init` 成功（或已存在）→ 进入下一步
-- ⚠️ 环境事实：P:\Project 下仓库会报 dubious ownership，用 `git -c safe.directory="<路径>" <cmd>` 绕过，勿改全局配置
+- 在确认的工作区执行 `git init -b main`（明确默认分支 main，与环境默认无关；已存在的仓库跳过）
+- **git 身份配置（关键步骤）**：确认本地 git 身份已配置，未配置则询问用户并执行：
+  - `git config user.name "<用户名>"`
+  - `git config user.email "<邮箱>"`
+  - （项目级配置即可，勿改全局；身份值同时用于占位符替换 {{AUTHOR_NAME}}/{{AUTHOR_EMAIL}}）
+- 闸门：`git init` 成功 + 身份已配置（或用户明确选择不配置）→ 进入下一步
+- ⚠️ 环境事实（条件式）：若报 dubious ownership（Windows 下常见，目录属主与当前用户不一致），用 `git -c safe.directory="<路径>" <cmd>` 逐命令绕过，勿改全局配置
 
 ### 3. ssh 远端（可选，状态：git-remote）
 
 - 询问用户是否链接远端仓库（用户可选——ssh 最稳定，https 需 token 管理）
-- 选择链接：`git remote add origin <ssh-url>`，确认远端可达
+- 选择链接：`git remote add origin <ssh-url>`，确认远端可达（`git ls-remote <url>`；沙箱内 ssh 管道被拦时引导权限升级）
 - 选择跳过：显式记录到 Progress.md
 - 闸门：用户选择完成（链接或跳过）→ 进入下一步
 
 ### 4. 生成默认骨架（状态：scaffold）
 
-按 assets/ 模板生成 9+2 项，**占位符替换**规则：
+按 assets/ 模板生成 9+2 项，**占位符替换**规则（模板实际使用的全部占位符；assets 与 skills 同属 preset 根目录，由当前 skill 文件路径上溯两级定位）：
 
 | 占位符 | 替换为 |
 |---|---|
-| `{{PROJECT_NAME}}` | 项目名 |
-| `{{REMOTE_URL}}` | ssh 远端地址（无则留空）|
-| `{{AUTHOR_NAME}}` | git 本地身份名 |
-| `{{AUTHOR_EMAIL}}` | git 本地身份邮箱 |
-| `{{SCENE_TYPE}}` | 场景类型（待访谈确认，先留待定）|
+| `{{PROJECT_NAME}}` | 项目名（取自工作区目录名，或询问用户）|
+| `{{PROJECT_VISION}}` | 项目愿景一句话 |
+| `{{REMOTE_URL}}` | ssh 远端地址（无则替换为空串）|
+| `{{AUTHOR_NAME}}` | git 本地身份名（步骤 2 已配置）|
+| `{{AUTHOR_EMAIL}}` | git 本地身份邮箱（步骤 2 已配置）|
+| `{{LICENSE_NAME}}` | 开源协议名（默认 Apache-2.0）|
+| `{{SCENE_TYPE}}` | 场景类型（访谈后填入；**初始替换为空串**——条件块依赖空值隐藏）|
+| `{{SCENE_TYPE_DETAIL}}` | 场景类型说明（访谈后补）|
+| `{{CURRENT_STAGE}}` | 当前阶段名 |
+| `{{CURRENT_STAGE_DESC}}` | 当前阶段描述 |
+
+**条件块语义**（`{{#KEY}}...{{/KEY}}`）：KEY 替换后为**非空**才渲染块内容；为空则整块隐藏。`{{#REMOTE_URL}}`（无远端则隐藏仓库信息行）、`{{#SCENE_TYPE}}`（访谈前为空则隐藏类型子结构段）必须按此语义处理，**不得**填入字面量 "待定"（真值会渲染错误内容）。
 
 模板清单（assets/ 目录）：
 
@@ -53,7 +63,7 @@ plan.md.tpl          → plan.md        （项目结构规范/开发规划/验�
 .gitattributes.tpl   → .gitattributes （换行符规范，统一 LF）
 ```
 
-- LICENSE：询问用户选择开源协议（默认 Apache-2.0，复制本 preset 的 LICENSE）
+- LICENSE：询问用户选择开源协议（默认 Apache-2.0，**复制 preset 自带 LICENSE**——presets/from-scratch/LICENSE 已内置）
 - Other/、Reference/ 目录创建（空目录由 .gitkeep 占位或文档中说明）
 - 初始提交：`git add -A && git commit -m "chore: 初始化项目骨架"`（提交规范：Conventional Commits）
 
@@ -63,10 +73,23 @@ plan.md.tpl          → plan.md        （项目结构规范/开发规划/验�
 - 失败：回本步重做；用户明确要求跳过则跳过并记录到 Progress.md
 - 通过：进入访谈阶段（interview skill）
 
+### 6. 阶段二：类型子结构生成（访谈后执行）
+
+- **时机**：访谈（interview skill）确定场景类型后、规格冻结前
+- **依据**：项目 Rules.md 第四章（其他骨架生成规则，项目内优先）
+- 按 4.1 判定的场景类型执行：
+  - 纯软件 → 4.2 软件子结构（有则生成：有前端才建 Frontend 等）
+  - 纯实体 → 4.3 硬件子结构（有则生成：Model/电路/嵌入式）
+  - 复合 → 4.4 软件+硬件组合
+- 生成后：更新 Structure.md 结构树 + **回填 SCENE_TYPE/SCENE_TYPE_DETAIL 占位符**（Structure.md 模板对应位置）+ git commit（"chore: 生成类型子结构"）
+- 闸门：子结构符合第四章规则、Structure.md 已同步 → 进入冻结阶段（freeze skill）
+- ⚠️ 本阶段是阶段一的延续：默认骨架（访谈前）+ 类型子结构（访谈后）都在本 skill 职责内
+
 ## 规则
 
-- 其他骨架（类型子结构：软件/硬件/复合）**不在本 skill 范围**——由访谈确定场景类型后按项目 Rules.md 第四章规则生成（见 interview skill 说明）
+- 本 skill 分两阶段：**阶段一**（默认骨架，访谈前）+ **阶段二**（类型子结构，访谈确定类型后执行，见第 6 节）
 - 任意状态可回退到之前任意状态（用户说"回到某步"即回退）
+- **回退副作用规则**：回退到某状态时，该状态之后的落盘产物（spec/tasks/commit）标记「已作废待重写」并记录到 Progress.md（与"写盘即记忆"一致，不静默丢弃）
 - 当前状态写入 Progress.md（中断可恢复续跑）
 
 ## 防漂移红旗表（Red Flags——这些想法意味着 STOP）

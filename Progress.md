@@ -2,19 +2,19 @@
 
 ## 当前阶段
 
-**阶段 1：需求理解冻结**（in_progress）—— Reference/IDEA.md v0.2 草案待用户确认，剩余待确认项见文档第九章。
+**阶段 5：验证（遍历性审计）** —— 6 实例并行审计中（4/6 已回：全部有条件通过，问题归集中）。
 
 ## 阶段总览
 
 | 阶段 | 状态 | 说明 |
 |---|---|---|
 | 0. 需求澄清访谈 | complete | 5 轮访谈 + plan.md 结构规范 + 5 项裁决 |
-| 1. 需求理解冻结 | in_progress | 确认 Reference/IDEA.md v0.2（含待确认清单）后冻结为 v1.0 |
-| 2. 产品设计 | pending | 问答流程（六步）、规格结构、脚手架模板细化 |
-| 3. 技术方案 | complete | 场景模式实现方案：agent preset 载体、工具白名单、skill 规范、流程状态机、插件壳 |
-| 4. 插件实现 | in_progress | preset 文件已创建（agent.cordis.yml/preset.yml/4 skill/assets 模板/薄插件壳）；待验证阶段实测插件壳注册 |
-| 5. 验证 | pending | 本地安装测试、端到端走一遍从零流程 |
-| 6. 开源分发 | pending | GitHub 仓库 + 插件市场发布、文档 |
+| 1. 需求理解 | complete | Reference/IDEA.md v0.2（65+ 条决策；2 项待确认不阻塞）|
+| 2. 产品设计 | complete | 问答六步、规格结构（spec/tasks）、功能域任务、状态机、分发、遍历检查升级 |
+| 3. 技术方案 | complete | agent preset 载体、工具白名单、skill 隔离、插件壳、规则内化分工 |
+| 4. 插件实现 | complete | 双场景 preset（from-scratch + confirm-first）+ 白盒检查修复 |
+| 5. 验证 | in_progress | 遍历性审计 6 实例（4 已回：有条件通过）+ 运行时实测（待做）|
+| 6. 开源分发 | in_progress | GitHub 元数据已配（description/topics）；插件市场发布待插件壳实测后 |
 
 ## 会话日志
 
@@ -25,12 +25,25 @@
 - [x] 用户提供 plan.md（项目结构规范：两路径、三场景、通用骨架、软件/硬件子结构）
 - [x] 5 项裁决：先通用骨架后类型结构 / 软件有则生成 / 进行中包含产物对照 / 文件按建议并入 / plan.md 既是模板也自举
 - [x] 按新结构自举本仓库（文件重组完成）
-- [x] 设计定案：问答六步/规格结构/tasks 功能域/状态机/分发/验收移出范围（57 条决策）
-- [x] 实现 preset「从零开始」：agent.cordis.yml + preset.yml + skills（scaffold/interview/freeze/task-split）+ assets 模板（7 个）+ 薄插件壳（package.json/cordis.patch.yml）
+
+### 2026-08 会话 2：设计与实现
+
+- [x] 设计定案：问答六步/规格结构（spec/tasks）/功能域任务/状态机/分发/验收移出范围
+- [x] 场景命名定案：「从零开始」+「先等等，让我确认一下」（confirm-first）
+- [x] 实现双场景 preset：agent.cordis.yml × 2 + 5 skill + assets 模板（7 个）+ 薄插件壳
+- [x] skill 隔离（防全局 skill 泄漏）+ superpowers/工程化思维提炼注入（红旗表/规则分级/工程准则）
+- [x] 遍历性检查升级（三层遍历+七维度+领域模板+可审计+影响面复验）
+- [x] 白盒逻辑检查修复（占位符表补全/类型子结构两阶段/polish 自包含/状态机补注）
+
+### 2026-08 会话 3：验证与分发
+
+- [x] 远端推送 ×2（8f18f28、e670e65 时点）
+- [x] 遍历性审计启动：6 实例并行子 agent（4/6 已回：全部有条件通过）
+- [x] GitHub 元数据：description + 5 topics 已配置（gh CLI）
 
 ## 下一步
 
-- [ ] 验证阶段：实测插件壳注册（cordis.patch.yml roots 合并语义）
-- [ ] 端到端走一遍从零流程（本仓库或新项目）
-- [ ] 用户确认 Reference/IDEA.md v0.2 → 冻结 v1.0
-- [ ] 远端推送（需权限升级）
+- [ ] 收集剩余 2 个审计（复合/变更目标）→ 归集问题清单
+- [ ] 按严重度修复审计问题（高：LICENSE 复制源/git 身份配置/条件块占位符/customSkillDirs 实测）
+- [ ] 运行时实测：preset 安装名单出现、skill 隔离生效、插件壳注册
+- [ ] 用户确认 Reference/IDEA.md → 冻结 v1.0
