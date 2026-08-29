@@ -8,7 +8,8 @@
 DSH-Project Initialization/
 ├── README.md         自述：愿景、特性、双场景、安装、使用
 ├── LICENSE           Apache-2.0
-├── plan.md           项目结构规范（脚手架模板母版）
+├── Reference/
+│   └── project-structure.md 项目结构规范参考
 ├── Rules.md          项目规范（骨架生成文件母版）
 ├── Structure.md      本文档
 ├── presets/          插件本体（agent-presets root）

@@ -74,7 +74,8 @@ node tools/verify-runtime.js   # 校验 preset 结构、skill 发现与隔离配
 ├── presets/
 │   ├── from-scratch/       场景「从零开始」：agent.cordis.yml + 4 个 skill + assets 模板
 │   └── confirm-first/      场景「先等等，让我确认一下」：agent.cordis.yml + polish skill
-├── plan.md                 项目结构规范（脚手架模板母版）
+├── Reference/
+│   └── project-structure.md   项目结构规范参考
 ├── Rules.md                项目规范（骨架生成文件母版）
 ├── Structure.md            仓库结构说明
 ├── tools/
