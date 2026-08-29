@@ -55,13 +55,17 @@ Copy-Item presets\confirm-first $presets -Recurse
 node tools/verify-runtime.js
 ```
 
-预期输出：
+预期输出（节选）：
 
 ```
+===== preset: from-scratch =====
+[baseUrl 表达式] OK → <...>\from-scratch\skills\
+[发现的 skill] freeze, interview, scaffold, task-split
 [preset.yml name] 从零开始
-[preset.yml order] 2
+===== preset: confirm-first =====
+[发现的 skill] polish
 [preset.yml name] 先等等，让我确认一下
-[preset.yml order] 3
+===== 汇总 =====
 from-scratch skills: freeze, interview, scaffold, task-split
 confirm-first skills: polish
 ```

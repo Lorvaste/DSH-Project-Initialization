@@ -66,7 +66,9 @@ description: 场景「从零开始」的规格冻结与成档：AI 结构化复�
 
 ### 4. 闸门与收尾
 
-- 闸门：spec.md 初版终稿写入 Reference/ 且内容与确认一致\n- **里程碑提交**：`git commit -m "docs: spec vX.Y 初版终稿"`（3.1 里程碑提交规则）\n- 进入任务拆分（task-split skill）
+- 闸门：spec.md 初版终稿写入 Reference/ 且内容与确认一致
+- **里程碑提交**：`git commit -m "docs: spec vX.Y 初版终稿"`（3.1 里程碑提交规则）
+- 进入任务拆分（task-split skill）
 - 冻结后变更：显式记录到 spec 变更记录 + Progress.md，禁止静默漂移
 - 状态写入 Progress.md
 
