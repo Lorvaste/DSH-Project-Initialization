@@ -34,7 +34,7 @@ qa (unified Q&A, two modes) | confirm | integrate (behavior, no document) | orga
 
 ### Install
 
-> See **[maintenance-docs/INSTALL.en.md](maintenance-docs/INSTALL.en.md)** for the full installation guide.
+> See **[maintenance-docs/INSTALL.en.md](maintenance-docs/INSTALL.en.md)** for the full installation guide (inside the GitHub repo; maintenance docs are not shipped in the npm package).
 
 **Option 1: Manual copy (zero build)**
 

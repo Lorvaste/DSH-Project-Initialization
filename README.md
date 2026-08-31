@@ -34,7 +34,7 @@ qa（统合问答，两模式）｜confirm（确认理解/纠偏）｜integrate�
 
 ### 安装
 
-> 完整安装指引（目录定位/更新/卸载/常见问题）见 **[维护文档/安装指引](maintenance-docs/INSTALL.md)**。
+> 完整安装指引（目录定位/更新/卸载/常见问题）见 **[维护文档/安装指引](maintenance-docs/INSTALL.md)**（在 GitHub 仓库内；npm 包不含维护文档）。
 
 **方式一：手动复制（零构建）**
 
