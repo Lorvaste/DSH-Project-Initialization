@@ -1,76 +1,67 @@
 # 项目结构规范（参考）
 
-> 项目结构规范参考（原根 plan.md 对外版）。结构定义以 core-library/presets/alignment/ 内模板（doc-templates / rule-templates，zh/en）为准；开发计划与进度为项目内部内容，不随公开仓库提交。
+> 项目结构规范参考。结构定义以 core-library/presets/alignment/ 内模板（doc-templates / rule-templates，zh/en）为准；开发计划与进度为项目内部内容，不随公开仓库提交。
 
----
+## 结构基准（三模式目录）
 
-## 第一部分：项目结构规范（脚手架模板）
-
-### 两类进入阶段
-
-1. **项目刚开始**
-2. **项目进行中**
-
-### 三种场景
-
-1. 纯软件场景
-2. 纯实体场景
-3. 复合场景项目（软件+硬件）
-
-### 项目刚开始的行为路径
+### 通用（必须 + 可选）
 
 ```
-确认工作区 → git 初始化 → ssh 链接远端仓库（用户可选，ssh 最稳定）
-→ 初始化项目结构并保存（先默认骨架 9+2 项）
-→ 进入需求问答阶段（确定类型/规模）
-→ 生成类型子结构（软件/硬件，有则生成）
-→ 整理统合需求并由用户确认（规格冻结）
-→ spec 初版终稿 → 任务拆分初稿（按功能域）
-→ 结构化编写文档并保存推送
+{Project}/
+├── README.md           自述文件（必须）
+├── LICENSE             开源协议（必须；未选择协议则内容为空）
+├── AGENTS.md           根规则（必须）
+├── structure.md        统一全局目录（必须，文档变化实时更新）
+├── .git/               版本控制（必须）
+├── Other/              其他（必须，内部）
+├── .gitignore          可选（用户决定）
+├── .gitattributes      可选（用户决定）
+└── Reference/          公开资料（可选，用户决定）
 ```
 
-### 项目进行中的行为路径
+### 需求确认场景
 
 ```
-确认工作区 → 确认 git 状态与远端链接
-→ 理解文档并由用户核对理解（复述确认）
-→ 结构化重排文档 → 用户确认完成或者继续修正文档内容（循环）
-→ 产物对照：AI 读取代码/文件，对照文档生成偏差清单 → 用户确认 → 逐项修正
+├── requirements-list.md        需求清单（必须：只总结清单，实时更新，禁引用/指向、禁决策信息）
+├── requirements-structure.md   需求结构/功能实现结构（必须：只总结结构，同禁）
+└── Other/requirements/
+    ├── qa-record.md            Q&A 问答记录
+    └── decision-log/           决策记录
 ```
 
-### 共有结构（默认骨架，先建）
+### 开发前场景（需求相关文件从需求确认移动归集）
 
 ```
-- README.md    自述文件：项目愿景、项目说明、文档目录
-- LICENSE      开源协议
-- Rules.md     项目规范：语言偏好、上下文规则、开发规则、术语标准
-- Structure.md 项目内容：结构化信息
-- Progress.md  项目进度（随项目提交）
-- plan.md      开发计划：开发规划、验收规则
-- Other/       其他内容：决策思路等
-- Reference/   参考文件（含冻结后规格文档 spec.md、任务拆分 tasks.md）
-- .gitignore    git 忽略规则（node_modules/dist/系统文件/密钥凭据等）
-- .gitattributes  换行符与属性规范（统一 LF，防 Windows CRLF 漂移）
-- .git/        git 相关文件
+├── requirements-summary.md                  需求总结与结构（必须）
+├── tech-selection.md                        技术选型（必须）
+├── project-plan-and-progress.md             项目规划与当前进度（必须）
+├── dev-domains/                             开发域文档（可选）
+│   ├── domain-rules.md                      域规则
+│   ├── tech-selection-and-implementation.md 技术选型与实现规划
+│   ├── implementation/                      实现
+│   ├── demo/                                功能 demo
+│   └── scripts/                             脚本
+└── Other/
+    ├── requirements/                        需求相关文件（从需求确认移动）
+    └── reference/                           联网检索参考资料
 ```
 
-### 软件子结构（有则生成——有前端才建 Frontend，无数据库不建 Database）
+### 维护场景（以下均可选）
 
 ```
-- Frontend/   前端相关文件与代码
-- Backend/    后端相关文件与代码
-- Database/   数据库相关文件与代码
+├── user-manual.md          使用说明
+├── CHANGELOG.md            版本与更新记录
+├── core-library/           主体库
+├── maintenance-docs/       维护文档
+│   ├── regression.md       回归清单
+│   ├── maintain-rules.md   维护规则（可选）
+│   └── audit/              审计（可选）
+└── Other/                  其他
 ```
 
-### 硬件子结构（有则生成，可扩展）
+## 生成规则
 
-```
-- Model/                模型相关文件
-- Electronic circuit/   电子电路相关文件
-- Embedded/             嵌入式开发相关文件
-- ...
-```
-
-### 复合项目
-
-按照类型与功能块拆分组合（软件子结构 + 硬件子结构）。
+- 模板体系：alignment/doc-templates（16 份）+ alignment/rule-templates（7 份），zh/en 双版
+- 模板只定义：表达方式 / 章节分级 / 可选章节
+- 生成方式：scaffold 按模板逐项确认，用户确认后落盘
+- 需求文档洁净：只总结清单或结构；禁引用其他文件或条目；禁决策信息；干净简洁
