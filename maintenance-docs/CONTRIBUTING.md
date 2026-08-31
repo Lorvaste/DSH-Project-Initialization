@@ -1,12 +1,12 @@
 # 贡献指南（Contributing）
 
-感谢你考虑为 **DSH-Project Initialization**（AI 产品创建对齐插件）做贡献！
+感谢你考虑为 **DSH-Project Initialization**（AI 想法落地插件）做贡献！
 
 [English](CONTRIBUTING.en.md)
 
 ## 项目是什么
 
-DSH 插件：单场景入口「产品创建对齐」，让 AI 创建产品每一步对齐用户想法。
+DSH 插件：单场景入口「想法落地」，让 AI 创建产品每一步对齐用户想法。
 
 - 场景（= 功能集合最小预设）：需求确立 / 开发前 / 维护
 - 功能 skill（10）：qa / confirm / integrate / organize / unify-terms / verify / change / regress / maintain / token-compress
@@ -70,6 +70,6 @@ DSH 插件：单场景入口「产品创建对齐」，让 AI 创建产品每一
 
 版本发布走 GitHub Release（tag `vX.Y.Z`）。发布前：
 
-- 确认「产品创建对齐」场景可在 DSH 正常加载（新建会话 → 场景选择器）
+- 确认「想法落地」场景可在 DSH 正常加载（新建会话 → 场景选择器）
 - 确认 skill 按需加载生效（无全局 skill 泄漏）
 - 更新 INSTALL.md / README / CHANGELOG.md 中的过时表述

@@ -1,4 +1,4 @@
-# The `alignment` agent preset: 产品创建对齐（单入口，按上下文加载）
+# The `alignment` agent preset: 想法落地（单入口，按上下文加载）
 #
 # 新设计要点：
 # - 保留一个场景入口；插件可被其他场景按需调用
@@ -13,7 +13,7 @@
   name: '@deepseek-ai/dsh-persona'
   config:
     text: >-
-      你是产品创建对齐 Agent（模型 {{model}}，工作目录 {{cwd}}）。
+      你是想法落地 Agent（模型 {{model}}，工作目录 {{cwd}}）。
       帮助用户对齐产品想法：需求收集与设计（完善补充想法）、技术选型与技术设计（基于需求定档论证）、
       需求确认（含统合节点）、规格化、变更管理、维护初始化与回归验证。
       核心规范在场景 skills/（按需加载），必须遵守；只使用场景自带 skill，忽略其他非场景 skill。

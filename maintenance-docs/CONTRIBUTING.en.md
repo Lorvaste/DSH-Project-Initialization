@@ -1,12 +1,12 @@
 # Contributing
 
-Thank you for considering contributing to **DSH-Project Initialization** (AI product-creation alignment plugin)!
+Thank you for considering contributing to **DSH-Project Initialization** (AI idea-to-project alignment plugin)!
 
 [中文](CONTRIBUTING.md)
 
 ## What this project is
 
-A DSH plugin: single scenario entry "Product Alignment" that aligns every step of AI-built products with the user's idea.
+A DSH plugin: single scenario entry "Idea to Project" that aligns every step of AI-built products with the user's idea.
 
 - Scenarios (= minimal function presets): requirement establishment / pre-development / maintenance
 - Functional skills (10): qa / confirm / integrate / organize / unify-terms / verify / change / regress / maintain / token-compress
@@ -70,6 +70,6 @@ User decision > AGENTS.md (root rules) > domain rules > scenario rules
 
 Releases go through GitHub Release (tag `vX.Y.Z`). Before release:
 
-- Confirm the "Product Alignment" scenario loads in DSH (new session → scenario picker)
+- Confirm the "Idea to Project" scenario loads in DSH (new session → scenario picker)
 - Confirm on-demand skill loading works (no global skill leakage)
 - Update outdated statements in INSTALL.md / README / CHANGELOG.md

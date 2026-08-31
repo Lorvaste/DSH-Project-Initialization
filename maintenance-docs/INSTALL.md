@@ -1,6 +1,6 @@
 # 安装指引
 
-DSH 插件「产品创建对齐」（`DSH-Project-Initialization`）的完整安装、更新与卸载说明。
+DSH 插件「想法落地」（`DSH-Project-Initialization`）的完整安装、更新与卸载说明。
 
 [English](INSTALL.en.md)
 
@@ -49,7 +49,7 @@ Copy-Item core-library\presets\alignment $presets -Recurse
 
 ## 第三步：检查安装
 
-在 DSH 新建会话，检查场景选择器是否出现「产品创建对齐」。
+在 DSH 新建会话，检查场景选择器是否出现「想法落地」。
 
 - 场景出现 → 安装成功
 - 缺场景 → 检查第二步的目录结构（是否有嵌套）、`agent.cordis.yml` 是否完整
@@ -58,7 +58,7 @@ Copy-Item core-library\presets\alignment $presets -Recurse
 
 | 场景 | 什么时候用 | 流程 |
 |---|---|---|
-| **产品创建对齐** | 从想法到维护全流程 | 需求确立（问答/确认/规格化）→ 开发前（技术选型/模板）→ 维护（再编排/变更/回归）|
+| **想法落地** | 一句话想法到维护基准 | 需求确立（问答/确认/规格化）→ 开发前（技术选型/模板）→ 维护（再编排/变更/回归）|
 
 场景内按提示一步步走；每一步 AI 先复述、你确认、才进下一步。
 

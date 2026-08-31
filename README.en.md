@@ -1,6 +1,6 @@
 # DSH-Project Initialization
 
-AI product-creation alignment plugin for DSH.
+AI idea-to-project alignment plugin for DSH.
 
 [中文](README.md)
 
@@ -52,7 +52,7 @@ After installing the plugin package, the host syncs the bundled `presets/` into 
 
 ### Use
 
-1. Create a new DSH session and pick "Product Alignment"
+1. Create a new DSH session and pick "Idea to Project"
 2. Advance by context: requirement establishment → pre-development → maintenance (at every stage the AI restates first, you confirm, then it proceeds)
 
 ## Rule highlights

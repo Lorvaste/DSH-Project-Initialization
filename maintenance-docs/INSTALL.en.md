@@ -1,6 +1,6 @@
 # Installation Guide
 
-Complete install, update, and uninstall instructions for the DSH plugin "Product Creation Alignment" (`DSH-Project-Initialization`).
+Complete install, update, and uninstall instructions for the DSH plugin "Idea to Project" (`DSH-Project-Initialization`).
 
 [中文](INSTALL.md)
 
@@ -49,7 +49,7 @@ Install the npm package `dsh-project-initialization` (add it to the DSH profile'
 
 ## Step 3: Verify the install
 
-Create a new DSH session and check whether the scenario picker shows "Product Alignment" (`产品创建对齐`).
+Create a new DSH session and check whether the scenario picker shows "Idea to Project" (`想法落地`).
 
 - Scenario present → installed successfully
 - Missing scenario → check the directory structure from Step 2 (any nesting), and that `agent.cordis.yml` is complete
@@ -58,7 +58,7 @@ Create a new DSH session and check whether the scenario picker shows "Product Al
 
 | Scenario | When to use | Flow |
 |---|---|---|
-| **Product Alignment** | Full journey from idea to maintenance | requirement establishment (Q&A/confirm/spec) → pre-development (tech selection/templates) → maintenance (re-orchestrate/change/regress) |
+| **Idea to Project** | From one-line idea to maintenance baseline | requirement establishment (Q&A/confirm/spec) → pre-development (tech selection/templates) → maintenance (re-orchestrate/change/regress) |
 
 Follow the prompts inside the scenario step by step; at every step the AI restates, you confirm, and only then it proceeds.
 
@@ -82,7 +82,7 @@ If installed via the plugin market, uninstall it in DSH's plugin manager instead
 
 | Issue | Cause & fix |
 |---|---|
-| Scenario picker doesn't show the two scenarios | Preset directory path wrong or structure incomplete — check the directory structure and `agent.cordis.yml`; make sure you copied into `.agent-presets` (not nested one level deeper) |
+| Scenario picker doesn't show the scenario | Preset directory path wrong or structure incomplete — check the directory structure and `agent.cordis.yml`; make sure you copied into `.agent-presets` (not nested one level deeper) |
 | No scenario skills inside the session | `customSkillDirs` baseUrl resolution failed — make sure the skill-filesystem line in `agent.cordis.yml` uses the baseUrl pattern (official form) and the preset directory contains `skills/` |
 | Unrelated skills appear in the skill list | Global skill leak — make sure `includeDefaultRoots: false` is on the skill-filesystem line in `agent.cordis.yml` |
 | git reports dubious ownership | Common on Windows: work around per command with `git -c safe.directory="<path>" <cmd>`, don't change the global config |

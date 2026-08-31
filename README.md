@@ -1,6 +1,6 @@
 # DSH-Project Initialization
 
-AI 产品创建对齐插件。
+AI 想法落地插件。
 
 [English](README.en.md)
 
@@ -52,7 +52,7 @@ Copy-Item core-library\presets\alignment "$env:APPDATA\dsh-desktop\harness\.agen
 
 ### 使用
 
-1. DSH 新建会话，选择「产品创建对齐」场景
+1. DSH 新建会话，选择「想法落地」场景
 2. 按上下文推进：需求确立 → 开发前 → 维护（各阶段 AI 先复述，你确认，才进下一步）
 
 ## 规则要点

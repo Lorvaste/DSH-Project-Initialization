@@ -4,7 +4,7 @@
 
 - [必须] 密钥与凭据：.env / *.pem / *.key / *.pfx / *.p12 / *.jks / credentials* / id_rsa / id_ed25519
 - [必须] 构建与依赖产物：node_modules / dist / build / *.tgz
-- [可选] 内部目录：Other/ 等内部区
+- [可选] 内部目录：Other/ 等内部区（整目录剔除，承接 v1.0.2 verification-issues.md 修复项）
 - [可选] 编辑器与系统文件：.vscode / .idea / .DS_Store / Thumbs.db
 - [可选] 本地环境：*.local / .hmr
 

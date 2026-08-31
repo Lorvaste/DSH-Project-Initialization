@@ -4,10 +4,12 @@
 
 - [required] Priority chain: user decision > AGENTS.md > domain rules > scenario rules
 - [required] Operation confirmation: state understanding, user confirms, then execute
+- [required] Confirmation mechanism: restate (structured, not verbatim) → user confirms → aligned; item-by-item confirmation (confirmed/pending/rejected); unconfirmed items do not advance; record source (draft proposal / user confirmation)
 - [required] User authority: silence ≠ consent; changes recorded; phase advancement by user
 - [required] Truthfulness: verify first, no assumptions; no hypothetical conclusions
 - [required] Language & naming: English filenames; zh/en mirror
 - [optional] Adjudication flow: conflict → record → user adjudicates → update rules
+- [optional] Documents not locked: docs = initial baseline, user may revise later
 - [optional] Glossary: unified terminology table
 - [optional] Requirement doc cleanliness: summary only; no references; no decision info
 - [optional] Evidence mechanism: conclusions with evidence; red-flag words trigger confirmation
