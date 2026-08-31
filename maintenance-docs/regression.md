@@ -6,17 +6,18 @@
 
 | ID | 功能点 | 验证步骤 | 预期结果 | 最近验证 |
 |---|---|---|---|---|
-| RG-01 | 场景名单 | DSH 重启后查看场景选择器 | 出现「从零开始」与「先等等，让我确认一下」 | 2026-08-30 |
-| RG-02 | skill 隔离 | 进入 from-scratch 场景查看 skill 列表 | 仅 freeze/interview/scaffold/task-split，无全局 skill 泄漏 | 2026-08-30 |
-| RG-03 | from-scratch 冒烟 | 空目录执行初始化 | 骨架 8+2 项生成、git init -b main、身份 Lorvaste、跳过项显式记录 | 2026-08-30 |
-| RG-04 | confirm-first 复述确认 | 提交初版方案 | F/D/R/I 四层复述 + MOD 预划分 | 2026-08-30 |
+| RG-01 | 场景名单 | DSH 重启后查看场景选择器 | 出现「产品创建对齐」 | 待验证 |
+| RG-02 | skill 按需加载 | 进入场景查看 skill 列表 | 仅 alignment 自带 12 skill（2 基础 + 10 功能），无全局 skill 泄漏 | 待验证 |
+| RG-03 | presets 同步 | 篡改 .agent-presets 下 agent.cordis.yml 后重启 | 插件壳幂等同步重建 | 待验证 |
+| RG-04 | 需求文档洁净 | 需求确立阶段生成 requirements-list/structure | 只总结清单/结构；禁引用；禁决策信息 | 待验证 |
+| RG-05 | 确认机制 | 各阶段推进 | AI 复述 → 用户确认 → 才进下一步 | 待验证 |
 
 ## 红-绿验证项
 
 | ID | 对象 | 故障注入步骤 | 恢复步骤 | 结果 |
 |---|---|---|---|---|
-| RG-01 | presets 同步 | 篡改 .agent-presets 下 agent.cordis.yml | 重启 DSH Desktop（插件壳幂等同步重建） | 待验证 |
 | RG-02 | skill 隔离 | 在用户根目录放置同名 skill | 场景内不出现 | 待验证 |
+| RG-03 | presets 同步 | 篡改 manifest | 重启重建覆盖 | 待验证 |
 
 ## 门槛标记
 

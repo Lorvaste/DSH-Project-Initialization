@@ -83,7 +83,7 @@ export const apply = mountOnce((ctx) => {
   try {
     mkdirSync(targetRoot, { recursive: true })
     const sourceRoot = bundledPresetsRoot()
-    for (const id of ['from-scratch', 'confirm-first']) {
+    for (const id of ['alignment']) {
       try {
         syncPreset(sourceRoot, targetRoot, id)
       } catch (error) {

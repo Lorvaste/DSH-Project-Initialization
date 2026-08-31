@@ -1,82 +1,75 @@
 # Contributing
 
-Thank you for considering contributing to **DSH-Project Initialization** (the AI product-creation alignment plugin)!
+Thank you for considering contributing to **DSH-Project Initialization** (AI product-creation alignment plugin)!
 
 [中文](CONTRIBUTING.md)
 
 ## What this project is
 
-A DSH plugin with two agent preset scenarios that align every step of AI-built products with the user's original idea.
+A DSH plugin: single scenario entry "Product Alignment" that aligns every step of AI-built products with the user's idea.
 
-| Scenario | preset id | Responsibility |
-|---|---|---|
-| From scratch | `from-scratch` | Idea → six-step Q&A → spec freeze → spec/tasks drafts → push |
-| Wait, let me confirm first | `confirm-first` | Finalize an initial plan / change the plan and goals of an in-progress project |
+- Scenarios (= minimal function presets): requirement establishment / pre-development / maintenance
+- Functional skills (10): qa / confirm / integrate / organize / unify-terms / verify / change / regress / maintain / token-compress
+- Skills load on context, invocable standalone; the plugin can be invoked by other scenarios
 
 ## Repository structure
 
 ```
-├── presets/                Plugin body (agent presets)
-│   ├── from-scratch/       Scenario 1: agent.cordis.yml + 4 skills + assets templates
-│   └── confirm-first/      Scenario 2: agent.cordis.yml + polish skill
-├── Reference/
-│   └── project-structure.md   Project structure specification reference
-├── Rules.md                Project rules (master template for generated skeletons)
-├── INSTALL.md / INSTALL.en.md   Installation guides
-├── src/                    Thin plugin shell (syncs presets/ into .agent-presets at startup)
-├── package.json            dsh bundle manifest
-└── cordis.patch.yml        Plugin shell registration
+├── core-library/presets/alignment/   Single entry: agent.cordis.yml + 12 skills + templates zh/en
+├── core-library/src/                 Thin plugin shell (syncs presets/ to .agent-presets at startup)
+├── maintenance-docs/                 Maintenance docs (install/contribute/reference/rules/regression/audit)
+├── AGENTS.md                         Root rules
+├── structure.md                      Global directory
+├── package.json                      dsh bundle manifest
+└── cordis.patch.yml                  Plugin shell registration
 ```
 
 ## Development conventions
 
-### Rule priority (arbitration chain, first match wins on conflict)
+### Rule priority
 
-1. Explicit user instruction
-2. Project Rules.md
-3. Domain rules (in domain skeletons)
-4. Scenario skill instructions
-5. Rules.md defaults
+User decision > AGENTS.md (root rules) > domain rules > scenario rules
 
-### Flow & state machine
+### Rule highlights
 
-Scenario 1 state machine: workspace → git-init → git-remote → scaffold → interview → freeze → spec-final → task-breakdown → docs-push → done.
+- Every operation: state understanding, user confirms, then execute
+- Phase advancement by user; no "assumed completion"
+- Verify first, no assumptions; no hypothetical conclusions
+- Requirement docs: summary lists/structures only, no references, no decision info, clean and concise
+- Docs = initial baseline, never locked
+- zh/en dual version (zh primary / en mirror)
 
-- Every stage has a **gate**: you may not enter the next stage until the current stage's checks pass
-- Any state may be rolled back; products written after a rollback target are marked "invalid, to be rewritten" and recorded in Progress.md
-- State is written to Progress.md (resumable after interruption)
+### Notes when changing skills
 
-### When modifying skills
+- New design definitions live in Other/cs1/ (mod1.md is authoritative)
+- Template & rule sync: when rules change, check doc-templates / rule-templates (zh/en)
+- Templates generate into user projects — change carefully
+- No literal `\n`; no leftover placeholders
 
-- **Skill self-containment**: confirm-first's polish skill must be fully self-contained (must not depend on from-scratch skills); from-scratch's 4 skills chain into each other (scaffold→interview→freeze→task-split)
-- **Template & rules sync**: `presets/from-scratch/assets/*.tpl` are the default skeleton templates, and `Rules.md` chapter 4 defines the skeleton generation rules — when changing rules, check whether templates need syncing; templates are generated into user projects, so change them carefully
-- **Placeholder semantics**: `{{KEY}}` substitution; `{{#KEY}}...{{/KEY}}` conditional blocks (render only when KEY is non-empty; hide the whole block when empty). Never fill a conditional block with the literal "pending" (a truthy value renders wrong content)
-- **Markdown hygiene**: never mix literal `\n` into tables/lists (historical lesson: it once corrupted template rendering)
-
-### git conventions
+### Git conventions
 
 - Branch: `main`, no long-lived parallel branches
-- Commits: Conventional Commits (`<type>(<scope>): <subject>`, type ∈ feat/fix/docs/chore/refactor/test/style/build/perf)
-- One milestone, one commit (e.g., skeleton, spec freeze, task breakdown)
-- Line endings: LF everywhere (.gitattributes is configured; don't change it)
+- Commits: Conventional Commits (type ∈ feat/fix/docs/chore/refactor/test/style/build/perf)
+- One commit per milestone
+- Line endings: LF (configured in .gitattributes, do not change)
 
 ## Non-public content
 
-The `Not public/` directory holds internal documents (development plans / progress / interview records / dev-time scripts). It is **not committed** with the repo (ignored by .gitignore) and is for local maintenance only. Don't include it in public-repo submissions.
+`Other/` (dsh-pjil / cs1 / Not public) holds internal docs and the derivation workspace; it is **not committed** (.gitignore covers it) and is for local use only.
 
-## Before opening a PR
+## Pre-PR checklist
 
-- [ ] Change follows the rule priority chain
-- [ ] Skill self-containment (confirm-first) / skill chaining complete (from-scratch)
-- [ ] Templates synced with Rules.md (when skeleton generation is affected)
+- [ ] Changes follow the rule priority chain
+- [ ] Skill rules consistent with the mod1 definition
+- [ ] Templates & rules synced (zh/en)
 - [ ] No literal `\n`, no leftover placeholders
-- [ ] Docs updated where relevant (README / INSTALL / Structure)
+- [ ] Docs updated (README / structure / user-manual as applicable)
 - [ ] Commit message follows Conventional Commits
 
-## Releasing
+## Release
 
-Releases go through GitHub Releases (tag `vX.Y.Z`). Before releasing:
+Releases go through GitHub Release (tag `vX.Y.Z`). Before release:
 
-- Confirm both scenarios load in DSH (new session → scenario picker)
-- Confirm skill isolation works (no global skill leak)
-- Update any outdated statements in INSTALL.md / README
+- Confirm the "Product Alignment" scenario loads in DSH (new session → scenario picker)
+- Confirm on-demand skill loading works (no global skill leakage)
+- Update outdated statements in INSTALL.md / README / CHANGELOG.md

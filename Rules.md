@@ -192,11 +192,10 @@ Reference/domains/MOD-01/          域骨架（一套文档）
 
 | 术语 | 定义 |
 |---|---|
-| 产品创建对齐插件 | 本项目：DSH 插件，通过场景让 AI 从零创建产品的每一步对齐用户想法 |
-| 场景 | agent preset（DSH 原生机制）：目录含 agent.cordis.yml，决定会话的工具、提示词与 skill |
-| 从零开始 | 场景一（preset id `from-scratch`）：没思路吗，从问答到确认试试——想法 → 规格初稿 + 任务拆分 |
-| 先等等，让我确认一下 | 场景二（preset id `confirm-first`）：感觉不对劲，要不复核理解再确认一下——初稿完善 / 方案变更 |
-| 工具白名单 | 场景只挂必要工具（ask-user/fs/bash 等，按场景需要挂载），省 token |
+| 产品创建对齐插件 | 本项目：DSH 插件，通过场景让 AI 创建产品的每一步对齐用户想法 |
+| 场景 | 功能集合最小预设（需求确立 / 开发前 / 维护）；场景与 skill 完全拆分，按上下文加载 |
+| 产品创建对齐 | 单场景入口（preset id `alignment`）：agent.cordis.yml + 12 skill + 模板 zh/en |
+| 工具白名单 | 场景只挂必要工具（ask-user/fs/bash 等），省 token |
 
 ### 流程
 

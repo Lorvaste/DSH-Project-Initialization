@@ -27,41 +27,38 @@ DSH's agent preset directory lives under DSH's data directory, typically:
 
 ### Option 1: Manual copy (zero build, recommended)
 
-Copy the two scenario directories from the repo's `core-library/presets/` into the preset directory:
+Copy the single scenario directory `alignment/` from the repo's `core-library/presets/` into the preset directory:
 
 ```powershell
 # Locate
 $presets = "$env:APPDATA\dsh-desktop\harness\.agent-presets"
 
 # Copy (make sure no old copies exist in the target, to avoid nesting)
-Remove-Item "$presets\from-scratch"  -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item "$presets\confirm-first" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item "$presets\alignment" -Recurse -Force -ErrorAction SilentlyContinue
 
-Copy-Item core-library\presets\from-scratch  $presets -Recurse
-Copy-Item core-library\presets\confirm-first $presets -Recurse
+Copy-Item core-library\presets\alignment $presets -Recurse
 ```
 
-> ⚠️ Delete before copy: overwriting an existing directory directly produces nesting (`from-scratch\from-scratch`), and the scenario will fail to load.
+> ⚠️ Delete before copy: overwriting an existing directory directly produces nesting (`alignment\alignment`), and the scenario will fail to load.
 
 ### Option 2: Plugin market (bundled presets)
 
-Install the npm package `dsh-project-initialization` (add it to the DSH profile's dependencies + bundles list); at host startup the plugin shell automatically syncs the bundled `presets/` into `.agent-presets`, and both scenarios appear in the list.
+Install the npm package `dsh-project-initialization` (add it to the DSH profile's dependencies + bundles list); at host startup the plugin shell automatically syncs the bundled `presets/` into `.agent-presets`, and the scenario appears in the list.
 
 > Plugin shell mechanism: at host startup the bundled presets/ are synced into `.agent-presets` (idempotent copy, equivalent to manual copy); after updating the plugin, a restart syncs it.
 
 ## Step 3: Verify the install
 
-Create a new DSH session and check whether the scenario picker shows "From scratch" (`从零开始`) and "Wait, let me confirm first" (`先等等，让我确认一下`).
+Create a new DSH session and check whether the scenario picker shows "Product Alignment" (`产品创建对齐`).
 
-- Both scenarios present → installed successfully
-- Missing scenarios → check the directory structure from Step 2 (any nesting), and that `agent.cordis.yml` is complete
+- Scenario present → installed successfully
+- Missing scenario → check the directory structure from Step 2 (any nesting), and that `agent.cordis.yml` is complete
 
 ## Usage
 
 | Scenario | When to use | Flow |
 |---|---|---|
-| **From scratch** | No idea where to start? Try going from Q&A to confirmation | confirm workspace → git → skeleton → six-step Q&A → freeze → spec draft + task breakdown → push |
-| **Wait, let me confirm first** | Something feels off? Review the understanding and confirm first | ① Finalize an initial plan ② Change the plan and goals of an in-progress project (version bump + change records) |
+| **Product Alignment** | Full journey from idea to maintenance | requirement establishment (Q&A/confirm/spec) → pre-development (tech selection/templates) → maintenance (re-orchestrate/change/regress) |
 
 Follow the prompts inside the scenario step by step; at every step the AI restates, you confirm, and only then it proceeds.
 
@@ -76,8 +73,7 @@ Version changes follow the repo's git history (README or Release notes).
 ## Uninstall
 
 ```powershell
-Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\from-scratch"  -Recurse -Force
-Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\confirm-first" -Recurse -Force
+Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\alignment" -Recurse -Force
 ```
 
 If installed via the plugin market, uninstall it in DSH's plugin manager instead.

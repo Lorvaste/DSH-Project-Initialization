@@ -10,22 +10,23 @@ AI 产品创建对齐插件。
 
 ## 这是什么
 
-用 AI 从零开始做产品，做出来的东西常常和最初的想法对不上。
+用 AI 从零做产品，结果常与最初想法对不上。
 
-这个插件解决的就是这个问题：给 DSH 加两个场景，让 AI 在动手之前把你要什么问清楚、写成规格、跟你逐条确认。确认过的才往下走，改过的都留记录。
+本插件解决这个问题：单场景入口「产品创建对齐」，AI 在动手前把需求问清楚、写成清单与结构、与你逐条确认。确认过的才往下走，改过的都留记录。
 
-## 场景
+## 场景（= 功能集合最小预设）
 
-| 场景 | preset id | 什么时候用 |
-|---|---|---|
-| **从零开始** | `from-scratch` | 没思路吗，从问答到确认试试——从一个想法出发，问答六步出规格初稿和任务拆分 |
-| **先等等，让我确认一下** | `confirm-first` | 感觉不对劲，要不复核理解再确认一下——完善初版方案，或改进行中项目的方案和目标 |
+| 场景 | 定位 |
+|---|---|
+| 需求确立 | 需求收集与设计（完善补充想法）+ 需求确认（含统合节点）+ 规格化 |
+| 开发前 | 技术选型与技术设计（基于需求定档论证）；开发类仅提供模板（开发方式用户自定） |
+| 维护 | 文档再编排（先行）+ 维护初始化 + 变更管理 + 回归验证 |
 
-## 它能做什么
+场景与功能 skill 完全拆分：skill 按上下文按需加载，每个 skill 可单独调用；插件可被其他场景按需调用。
 
-- **问答六步**：想做什么 → 功能范围 → 细节（一次一问）→ 功能域拆分 → 查漏 → 成档
-- **规格冻结**：AI 复述需求，你逐条确认，没确认的不算数
-- **查漏**：查逻辑矛盾、覆盖缺口、歧义、不可验证的条目
+## 功能 skill（10 个）
+
+qa（统合问答，两模式）｜confirm（确认理解/纠偏）｜integrate（统合节点，行为）｜organize（规格化 + 文档再编排）｜unify-terms（术语一致化）｜verify（遍历性检查）｜change（变更管理）｜regress（回归验证）｜maintain（维护初始化）｜token-compress（token 压缩，需求确立阶段不生效）
 
 ## 快速开始
 
@@ -37,60 +38,46 @@ AI 产品创建对齐插件。
 
 ```powershell
 # 先删后复制，避免嵌套
-Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\from-scratch"  -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\confirm-first" -Recurse -Force -ErrorAction SilentlyContinue
-Copy-Item core-library\presets\from-scratch  "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
-Copy-Item core-library\presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
+Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\alignment" -Recurse -Force -ErrorAction SilentlyContinue
+Copy-Item core-library\presets\alignment "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
 ```
 
 > `.agent-presets` 实际路径以 DSH 安装的 `<dshHome>` 为准。
 
 **方式二：插件市场**
 
-安装插件包（`dsh-project-initialization`）后，`cordis.patch.yml` 注册插件壳，宿主启动时自动把包内 `presets/` 同步到 `.agent-presets`（幂等，与手动复制等效），两个场景自动出现在名单。
+安装插件包（`dsh-project-initialization`）后，`cordis.patch.yml` 注册插件壳，宿主启动时自动把包内 `presets/` 同步到 `.agent-presets`（幂等，与手动复制等效），场景自动出现在名单。
 
 ### 使用
 
-1. DSH 新建会话，选一个场景
-2. **从零开始**：确认工作区 → git → 骨架 → 问答六步 → 冻结 → 规格初稿 + 任务拆分 → 推送
-3. **先等等，让我确认一下**：提交初版方案完善成档，或改进行中项目的方案和目标
+1. DSH 新建会话，选择「产品创建对齐」场景
+2. 按上下文推进：需求确立 → 开发前 → 维护（各阶段 AI 先复述，你确认，才进下一步）
 
-## 工作原理
+## 规则要点
 
-```
-想做什么 → 功能范围 → 细节确认 → 功能域拆分 → 查漏 → 确认成档
-    │                                        │           │
-    └── 每步过闸，没过就停在当前步 ←──────────┘           ↓
-                                     spec.md（冻结，条目编号 + 功能域清单）
-                                     tasks.md（按功能域组织，任务关联规格条目）
-```
-
-每个阶段：AI 先复述，你确认，才进下一步。
+- 所有操作：先告知理解，用户确认后再执行
+- 阶段推进由用户决定；禁止"假定完成"
+- 沉默 ≠ 同意；变更显式记录
+- 先查证不假设；禁止假设性结论
+- 需求文档：只总结清单/结构，禁引用、禁决策信息，干净简洁
+- 文档 = 初始基准，不锁死
+- 中英双版（zh 主版 / en 镜像）
 
 ## 仓库结构（维护场景布局）
 
 ```
 ├── core-library/                主体库
-│   ├── presets/                 插件本体（agent-presets root）
-│   │   ├── from-scratch/        场景「从零开始」：agent.cordis.yml + 4 个 skill + assets 模板
-│   │   └── confirm-first/       场景「先等等，让我确认一下」：agent.cordis.yml + polish skill
+│   ├── presets/alignment/       单场景入口（agent.cordis.yml + 12 skill + 模板 zh/en）
 │   └── src/                     插件壳代码（presets 同步）
-├── maintenance-docs/            维护文档
-│   ├── INSTALL.md / INSTALL.en.md   安装指引
-│   ├── CONTRIBUTING.md / CONTRIBUTING.en.md   贡献指南
-│   ├── Reference/               项目结构规范参考
-│   ├── maintain-rules.md        维护规则
-│   ├── regression.md            回归清单
-│   └── audit/                   审计
+├── maintenance-docs/            维护文档（安装/贡献/参考/维护规则/回归清单/审计）
 ├── user-manual.md               使用说明
 ├── CHANGELOG.md                 版本与更新记录
 ├── AGENTS.md                    根规则
 ├── structure.md                 统一全局目录
-├── Rules.md                     项目规则（骨架生成文件母版）
-├── package.json                 薄插件壳（dsh bundle manifest）
-├── cordis.patch.yml             插件壳注册
-├── .gitignore / .gitattributes  剔除与行尾规则
+├── README.md / README.en.md     自述
 ├── LICENSE                      Apache-2.0
+├── Rules.md                     项目规则
+├── package.json / cordis.patch.yml / .gitignore / .gitattributes
 └── Other/                       其他（内部，剔除：dsh-pjil / cs1 / Not public）
 ```
 

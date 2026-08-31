@@ -1,6 +1,6 @@
 # 项目结构规范（参考）
 
-> 项目结构规范参考（原根 plan.md 对外版）。脚手架模板定义以 presets/from-scratch/assets/plan.md.tpl 为准；开发计划与进度为项目内部内容，不随公开仓库提交。
+> 项目结构规范参考（原根 plan.md 对外版）。结构定义以 core-library/presets/alignment/ 内模板（doc-templates / rule-templates，zh/en）为准；开发计划与进度为项目内部内容，不随公开仓库提交。
 
 ---
 

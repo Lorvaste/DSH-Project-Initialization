@@ -1,7 +1,7 @@
 # structure.md — 统一全局目录
 
 > 全局目录（维护场景定义：文档变化实时更新）。
-> 本仓库是「AI 产品创建对齐」插件（DSH agent preset 双场景）。
+> 本仓库是「AI 产品创建对齐」插件（单场景入口 alignment）。
 
 ## 目录树
 
@@ -17,9 +17,7 @@ DSH-Project Initialization/
 ├── package.json                  薄插件壳（dsh bundle manifest）
 ├── cordis.patch.yml              插件壳注册
 ├── core-library/                 主体库
-│   ├── presets/                  插件本体（agent-presets root）
-│   │   ├── from-scratch/         场景「从零开始」：agent.cordis.yml + 4 skills + assets
-│   │   └── confirm-first/        场景「先等等，让我确认一下」：agent.cordis.yml + polish
+│   ├── presets/alignment/      单场景入口「产品创建对齐」：agent.cordis.yml + 12 skills + 模板 zh/en
 │   └── src/                      插件壳代码（presets 同步）
 ├── maintenance-docs/             维护文档
 │   ├── INSTALL.md / INSTALL.en.md   安装指引
