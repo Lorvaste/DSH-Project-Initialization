@@ -13,7 +13,6 @@ DSH-Project Initialization/
 ├── structure.md                  本文件（统一全局目录）
 ├── user-manual.md                使用说明
 ├── CHANGELOG.md                  版本与更新记录
-├── Rules.md                      项目规则（骨架生成文件母版）
 ├── package.json                  薄插件壳（dsh bundle manifest）
 ├── cordis.patch.yml              插件壳注册
 ├── core-library/                 主体库

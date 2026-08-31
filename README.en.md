@@ -78,7 +78,6 @@ After installing the plugin package, the host syncs the bundled `presets/` into 
 ├── structure.md                 Global directory
 ├── README.md / README.en.md     Readme
 ├── LICENSE                      Apache-2.0
-├── Rules.md                     Project rules
 ├── package.json / cordis.patch.yml / .gitignore / .gitattributes
 └── Other/                       Other (internal, excluded: dsh-pjil / cs1 / Not public)
 ```
