@@ -8,11 +8,13 @@ AI product-creation alignment plugin for DSH.
 
 ---
 
-## What it is
+## Project Overview
 
-When you build a product from scratch with AI, the result often drifts from what you originally had in mind.
+Have you ever had an idea that never quite became a project? In the AI era, do you still find yourself spending too much time on repetitive groundwork instead of actual creation?
 
-This plugin addresses exactly that: a single scenario entry "Product Alignment" where the AI asks what you want clearly, writes it down as lists and structure, and confirms every item with you before moving on. Only what you confirmed moves forward; everything changed is recorded.
+Built for independent creators, this plugin turns a vague idea into clear requirements through continuous Q&A via a single scenario entry and scenario presets: requirement establishment refines and integrates the idea, pre-development argues the tech route from the requirements, maintenance keeps everything aligned with regression — ending in a reusable project structure document, with every step traceable and revisable.
+
+It is more than an initialization tool — it is a way to form a creative habit: every operation states its understanding first and waits for your confirmation; phase advancement is yours to decide; requirement documents keep only clean, concise lists and structures, never locked. Especially for creators starting from zero, structured guidance clears the path and lowers the barrier to start — so every idea gets a chance to grow into a complete project.
 
 ## Scenarios (= minimal function presets)
 
