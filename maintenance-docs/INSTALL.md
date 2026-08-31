@@ -82,7 +82,7 @@ Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\alignment" -Recurse
 
 | 问题 | 原因与处理 |
 |---|---|
-| 场景选择器看不到两个场景 | preset 目录路径不对或结构不完整——检查目录结构与 `agent.cordis.yml`；确认复制到 `.agent-presets` 下（不是里面再套一层）|
+| 场景选择器看不到场景 | preset 目录路径不对或结构不完整——检查目录结构与 `agent.cordis.yml`；确认复制到 `.agent-presets` 下（不是里面再套一层）|
 | 场景里没有场景 skill | `customSkillDirs` 的 baseUrl 解析失败——确认 `agent.cordis.yml` 的 skill-filesystem 行是 baseUrl 范式（官方写法），preset 目录含 `skills/` |
 | skill 列表里出现无关 skill | 全局 skill 泄漏——确认 `includeDefaultRoots: false` 在 `agent.cordis.yml` 的 skill-filesystem 行 |
 | git 操作报 dubious ownership | Windows 常见：用 `git -c safe.directory="<路径>" <cmd>` 逐命令绕过，勿改全局配置 |
