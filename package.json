@@ -1,6 +1,6 @@
 {
   "name": "dsh-project-initialization",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "DSH 插件「产品创建对齐」（DSH-Project-Initialization）：单场景入口 alignment——需求确立 / 开发前 / 维护三场景最小预设，10 个功能 skill 按上下文加载，让 AI 创建产品每一步对齐用户想法。",
   "type": "module",
   "main": "./core-library/src/index.js",
