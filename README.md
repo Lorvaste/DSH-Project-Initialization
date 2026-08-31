@@ -31,7 +31,7 @@ AI 产品创建对齐插件。
 
 ### 安装
 
-> 完整安装指引（目录定位/更新/卸载/常见问题）见 **[INSTALL.md](INSTALL.md)**。
+> 完整安装指引（目录定位/更新/卸载/常见问题）见 **[维护文档/安装指引](maintenance-docs/INSTALL.md)**。
 
 **方式一：手动复制（零构建）**
 
@@ -39,17 +39,15 @@ AI 产品创建对齐插件。
 # 先删后复制，避免嵌套
 Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\from-scratch"  -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\confirm-first" -Recurse -Force -ErrorAction SilentlyContinue
-Copy-Item presets\from-scratch  "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
-Copy-Item presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
+Copy-Item core-library\presets\from-scratch  "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
+Copy-Item core-library\presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
 ```
 
 > `.agent-presets` 实际路径以 DSH 安装的 `<dshHome>` 为准。
 
 **方式二：插件市场**
 
-安装插件包（`dsh-project-initialization`）后，`cordis.patch.yml` 会把 `presets/` 注册为 preset root（`trust: system`），两个场景自动出现在名单。
-
-> 安装插件包后，宿主启动时自动把 presets/ 同步到 `.agent-presets`（幂等，与手动复制等效）。
+安装插件包（`dsh-project-initialization`）后，`cordis.patch.yml` 注册插件壳，宿主启动时自动把包内 `presets/` 同步到 `.agent-presets`（幂等，与手动复制等效），两个场景自动出现在名单。
 
 ### 使用
 
@@ -69,21 +67,31 @@ Copy-Item presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets
 
 每个阶段：AI 先复述，你确认，才进下一步。
 
-## 仓库结构
+## 仓库结构（维护场景布局）
 
 ```
-├── presets/
-│   ├── from-scratch/       场景「从零开始」：agent.cordis.yml + 4 个 skill + assets 模板
-│   └── confirm-first/      场景「先等等，让我确认一下」：agent.cordis.yml + polish skill
-├── INSTALL.md              安装指引（目录定位/更新/卸载/常见问题）
-├── CONTRIBUTING.md         贡献指南
-├── Reference/
-│   └── project-structure.md   项目结构规范参考
-├── Rules.md                项目规范（骨架生成文件母版）
-├── Structure.md            仓库结构说明
-├── package.json            薄插件壳（dsh bundle manifest）
-├── cordis.patch.yml        插件壳注册（presets/ root）
-└── LICENSE                 Apache-2.0
+├── core-library/                主体库
+│   ├── presets/                 插件本体（agent-presets root）
+│   │   ├── from-scratch/        场景「从零开始」：agent.cordis.yml + 4 个 skill + assets 模板
+│   │   └── confirm-first/       场景「先等等，让我确认一下」：agent.cordis.yml + polish skill
+│   └── src/                     插件壳代码（presets 同步）
+├── maintenance-docs/            维护文档
+│   ├── INSTALL.md / INSTALL.en.md   安装指引
+│   ├── CONTRIBUTING.md / CONTRIBUTING.en.md   贡献指南
+│   ├── Reference/               项目结构规范参考
+│   ├── maintain-rules.md        维护规则
+│   ├── regression.md            回归清单
+│   └── audit/                   审计
+├── user-manual.md               使用说明
+├── CHANGELOG.md                 版本与更新记录
+├── AGENTS.md                    根规则
+├── structure.md                 统一全局目录
+├── Rules.md                     项目规则（骨架生成文件母版）
+├── package.json                 薄插件壳（dsh bundle manifest）
+├── cordis.patch.yml             插件壳注册
+├── .gitignore / .gitattributes  剔除与行尾规则
+├── LICENSE                      Apache-2.0
+└── Other/                       其他（内部，剔除：dsh-pjil / cs1 / Not public）
 ```
 
 ## 许可

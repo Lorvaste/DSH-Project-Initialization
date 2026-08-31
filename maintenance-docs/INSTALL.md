@@ -27,7 +27,7 @@ DSH 的 agent preset 目录在 DSH 数据目录下，一般路径：
 
 ### 方式一：手动复制（零构建，推荐）
 
-把仓库 `presets/` 下的两个场景目录复制到 preset 目录：
+把仓库 `core-library/presets/` 下的两个场景目录复制到 preset 目录：
 
 ```powershell
 # 定位
@@ -37,8 +37,8 @@ $presets = "$env:APPDATA\dsh-desktop\harness\.agent-presets"
 Remove-Item "$presets\from-scratch"  -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item "$presets\confirm-first" -Recurse -Force -ErrorAction SilentlyContinue
 
-Copy-Item presets\from-scratch  $presets -Recurse
-Copy-Item presets\confirm-first $presets -Recurse
+Copy-Item core-library\presets\from-scratch  $presets -Recurse
+Copy-Item core-library\presets\confirm-first $presets -Recurse
 ```
 
 > ⚠️ 先删后复制：直接覆盖已存在的目录会产生嵌套（`from-scratch\from-scratch`），场景将无法加载。

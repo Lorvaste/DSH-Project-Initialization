@@ -36,5 +36,5 @@ id_ed25519
 *.local
 .hmr/
 
-# 不公开内容（本地维护，不随公开仓库提交）
-Not public/
+# 内部目录（本地维护，不随公开仓库提交：dsh-pjil / cs1 / Not public）
+Other/

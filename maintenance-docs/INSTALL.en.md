@@ -27,7 +27,7 @@ DSH's agent preset directory lives under DSH's data directory, typically:
 
 ### Option 1: Manual copy (zero build, recommended)
 
-Copy the two scenario directories from the repo's `presets/` into the preset directory:
+Copy the two scenario directories from the repo's `core-library/presets/` into the preset directory:
 
 ```powershell
 # Locate
@@ -37,8 +37,8 @@ $presets = "$env:APPDATA\dsh-desktop\harness\.agent-presets"
 Remove-Item "$presets\from-scratch"  -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item "$presets\confirm-first" -Recurse -Force -ErrorAction SilentlyContinue
 
-Copy-Item presets\from-scratch  $presets -Recurse
-Copy-Item presets\confirm-first $presets -Recurse
+Copy-Item core-library\presets\from-scratch  $presets -Recurse
+Copy-Item core-library\presets\confirm-first $presets -Recurse
 ```
 
 > ⚠️ Delete before copy: overwriting an existing directory directly produces nesting (`from-scratch\from-scratch`), and the scenario will fail to load.

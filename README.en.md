@@ -31,7 +31,7 @@ This plugin addresses exactly that: it adds two scenarios to DSH where the AI as
 
 ### Install
 
-> See **[INSTALL.en.md](INSTALL.en.md)** for the full installation guide (directory location / update / uninstall / FAQ).
+> See **[maintenance-docs/INSTALL.en.md](maintenance-docs/INSTALL.en.md)** for the full installation guide (directory location / update / uninstall / FAQ).
 
 **Option 1: Manual copy (zero build)**
 
@@ -39,17 +39,15 @@ This plugin addresses exactly that: it adds two scenarios to DSH where the AI as
 # Delete first, then copy, to avoid nesting
 Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\from-scratch"  -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item "$env:APPDATA\dsh-desktop\harness\.agent-presets\confirm-first" -Recurse -Force -ErrorAction SilentlyContinue
-Copy-Item presets\from-scratch  "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
-Copy-Item presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
+Copy-Item core-library\presets\from-scratch  "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
+Copy-Item core-library\presets\confirm-first "$env:APPDATA\dsh-desktop\harness\.agent-presets\" -Recurse
 ```
 
 > The actual `.agent-presets` path follows the `<dshHome>` of your DSH installation.
 
 **Option 2: Plugin market**
 
-After installing the plugin package (`dsh-project-initialization`), `cordis.patch.yml` registers `presets/` as a preset root (`trust: system`), and both scenarios appear in the list automatically.
-
-> With the package installed, the host syncs presets/ into `.agent-presets` at startup (idempotent, equivalent to manual copy).
+After installing the plugin package (`dsh-project-initialization`), `cordis.patch.yml` registers the plugin shell, and the host syncs the bundled `presets/` into `.agent-presets` at startup (idempotent, equivalent to manual copy); both scenarios appear in the list automatically.
 
 ### Use
 
@@ -69,21 +67,31 @@ what you want → feature scope → detail confirmation → feature-domain split
 
 At every stage: the AI restates first, you confirm, and only then does it proceed.
 
-## Repository structure
+## Repository structure (maintenance-scenario layout)
 
 ```
-├── presets/
-│   ├── from-scratch/       Scenario "From scratch": agent.cordis.yml + 4 skills + assets templates
-│   └── confirm-first/      Scenario "Wait, let me confirm first": agent.cordis.yml + polish skill
-├── INSTALL.md / INSTALL.en.md   Installation guides (directory location / update / uninstall / FAQ)
-├── CONTRIBUTING.md / CONTRIBUTING.en.md   Contribution guides
-├── Reference/
-│   └── project-structure.md   Project structure specification reference
-├── Rules.md                Project rules (master template for generated skeletons)
-├── Structure.md            Repository structure description
-├── package.json            Thin plugin shell (dsh bundle manifest)
-├── cordis.patch.yml        Plugin shell registration (presets/ root)
-└── LICENSE                 Apache-2.0
+├── core-library/                Core library
+│   ├── presets/                 Plugin body (agent-presets root)
+│   │   ├── from-scratch/        Scenario "From scratch": agent.cordis.yml + 4 skills + assets templates
+│   │   └── confirm-first/       Scenario "Wait, let me confirm first": agent.cordis.yml + polish skill
+│   └── src/                     Plugin shell code (presets sync)
+├── maintenance-docs/            Maintenance docs
+│   ├── INSTALL.md / INSTALL.en.md    Installation guides
+│   ├── CONTRIBUTING.md / CONTRIBUTING.en.md    Contribution guides
+│   ├── Reference/               Project structure specification reference
+│   ├── maintain-rules.md        Maintenance rules
+│   ├── regression.md            Regression checklist
+│   └── audit/                   Audit
+├── user-manual.md               User manual
+├── CHANGELOG.md                 Version & update record
+├── AGENTS.md                    Root rules
+├── structure.md                 Global directory
+├── Rules.md                     Project rules (master template for generated skeletons)
+├── package.json                 Thin plugin shell (dsh bundle manifest)
+├── cordis.patch.yml             Plugin shell registration
+├── .gitignore / .gitattributes  Exclusion & line-ending rules
+├── LICENSE                      Apache-2.0
+└── Other/                       Other (internal, excluded: dsh-pjil / cs1 / Not public)
 ```
 
 ## License
