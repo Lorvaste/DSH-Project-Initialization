@@ -8,7 +8,7 @@
 |---|---|---|---|---|
 | RG-01 | 场景名单 | DSH 重启后查看场景选择器 | 出现「想法落地」 | 2026-09-01 通过 |
 | RG-02 | skill 按需加载 | 进入场景查看 skill 列表 | 仅 alignment 自带 12 skill（2 基础 + 10 功能），无全局 skill 泄漏 | 2026-09-01 通过 |
-| RG-03 | presets 同步 | 篡改 .agent-presets 下 agent.cordis.yml 后重启 | 插件壳幂等同步重建 | 2026-09-01 通过（红-绿 test-sync-preset.mjs） |
+| RG-03 | presets 同步 | 篡改 .agent-presets 下 agent.cordis.yml 后重启 | 插件壳幂等同步重建 | 2026-09-01 通过（红-绿验证） |
 | RG-04 | 需求文档洁净 | 需求确立阶段生成 requirements-list/structure | 只总结清单/结构；禁引用；禁决策信息 | 待验证 |
 | RG-05 | 确认机制 | 各阶段推进 | AI 复述 → 用户确认 → 才进下一步 | 待验证 |
 
@@ -17,7 +17,7 @@
 | ID | 对象 | 故障注入步骤 | 恢复步骤 | 结果 |
 |---|---|---|---|---|
 | RG-02 | skill 隔离 | 在用户根目录放置同名 skill | 场景内不出现 | 待验证 |
-| RG-03 | presets 同步 | 篡改 manifest | 重启重建覆盖 | 2026-09-01 通过（test-sync-preset.mjs，workspace 内模拟） |
+| RG-03 | presets 同步 | 篡改 manifest | 重启重建覆盖 | 2026-09-01 通过（workspace 内模拟） |
 
 ## 门槛标记
 

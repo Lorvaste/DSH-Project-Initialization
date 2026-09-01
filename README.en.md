@@ -79,7 +79,7 @@ After installing the plugin package, the host syncs the bundled `presets/` into 
 ├── README.md / README.en.md     Readme
 ├── LICENSE                      Apache-2.0
 ├── package.json / cordis.patch.yml / .gitignore / .gitattributes
-└── Other/                       Other (internal, excluded: dsh-pjil / cs1 / Not public)
+└── Other/                       Other (internal, excluded)
 ```
 
 ## License

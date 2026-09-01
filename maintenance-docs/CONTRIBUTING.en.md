@@ -41,7 +41,7 @@ User decision > AGENTS.md (root rules) > domain rules > scenario rules
 
 ### Notes when changing skills
 
-- New design definitions live in Other/cs1/ (mod1.md is authoritative)
+- Structure definition: plugin implementation lives in core-library/presets/alignment (single-scenario alignment); generated-project structure in maintenance-docs/Reference/project-structure.md
 - Template & rule sync: when rules change, check doc-templates / rule-templates (zh/en)
 - Templates generate into user projects — change carefully
 - No literal `\n`; no leftover placeholders
@@ -55,12 +55,12 @@ User decision > AGENTS.md (root rules) > domain rules > scenario rules
 
 ## Non-public content
 
-`Other/` (dsh-pjil / cs1 / Not public) holds internal docs and the derivation workspace; it is **not committed** (.gitignore covers it) and is for local use only.
+`Other/` holds internal project docs (plan/progress/audit); it is **not committed** (.gitignore covers it) and is for local use only.
 
 ## Pre-PR checklist
 
 - [ ] Changes follow the rule priority chain
-- [ ] Skill rules consistent with the mod1 definition
+- [ ] Skill rules consistent with the implementation (core-library/presets/alignment/skills)
 - [ ] Templates & rules synced (zh/en)
 - [ ] No literal `\n`, no leftover placeholders
 - [ ] Docs updated (README / structure / user-manual as applicable)

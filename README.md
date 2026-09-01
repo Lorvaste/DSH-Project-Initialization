@@ -79,7 +79,7 @@ Copy-Item core-library\presets\alignment "$env:APPDATA\dsh-desktop\harness\.agen
 ├── README.md / README.en.md     自述
 ├── LICENSE                      Apache-2.0
 ├── package.json / cordis.patch.yml / .gitignore / .gitattributes
-└── Other/                       其他（内部，剔除：dsh-pjil / cs1 / Not public）
+└── Other/                       其他（内部，剔除）
 ```
 
 ## 许可

@@ -26,7 +26,7 @@ DSH-Project Initialization/
 │   ├── regression.md             回归清单
 │   └── audit/                    审计
 ├── .gitignore / .gitattributes   剔除与行尾规则
-└── Other/                        其他（内部，剔除：dsh-pjil / cs1 / Not public）
+└── Other/                        其他（内部，剔除）
 ```
 
 ## 文档登记表
@@ -43,3 +43,7 @@ DSH-Project Initialization/
 | 维护规则 | maintenance-docs/maintain-rules.md | 维护规则变更时 |
 | 回归清单 | maintenance-docs/regression.md | 功能点变化时 |
 | 结构规范参考 | maintenance-docs/Reference/project-structure.md | 结构定义变更时 |
+
+## 变更记录
+
+- 2026-09-01：Other/ 清理更新——内部文档直接存放于 Other/（不再分区），其余内容剔除（.gitignore）

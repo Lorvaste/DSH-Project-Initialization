@@ -41,7 +41,7 @@ DSH 插件：单场景入口「想法落地」，让 AI 创建产品每一步对
 
 ### 修改 skill 时的注意
 
-- 新设计定义见 Other/cs1/（mod1.md 为权威）
+- 结构定义：插件实现见 core-library/presets/alignment（单场景 alignment）；生成项目结构见 maintenance-docs/Reference/project-structure.md
 - 模板与规则同步：改动规则时检查 doc-templates / rule-templates（zh/en）是否需要同步
 - 模板是生成到用户项目的，改动需谨慎
 - 无字面 `\n`、无残留占位符
@@ -55,12 +55,12 @@ DSH 插件：单场景入口「想法落地」，让 AI 创建产品每一步对
 
 ## 不公开内容
 
-`Other/`（dsh-pjil / cs1 / Not public）存放内部文档与推导工作区，**不随仓库提交**（.gitignore 已忽略），仅供本地维护。
+`Other/` 存放项目内部文档（计划/进度/审计等），**不随仓库提交**（.gitignore 已忽略），仅供本地维护。
 
 ## 提 PR 前检查
 
 - [ ] 修改符合规则优先级链
-- [ ] skill 规则与 mod1 定案一致
+- [ ] skill 规则与实装一致（core-library/presets/alignment/skills）
 - [ ] 模板与规则同步（zh/en）
 - [ ] 无字面 `\n`、无残留占位符
 - [ ] 文档已更新（README / structure / user-manual 相应位置）

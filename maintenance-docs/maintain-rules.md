@@ -25,5 +25,5 @@
 
 ## 归档与剔除
 
-- 内部目录 Other/（dsh-pjil / cs1 / Not public）整体剔除（.gitignore）
+- 内部目录 Other/ 整体剔除（.gitignore）
 - 审计产物入 maintenance-docs/audit/
