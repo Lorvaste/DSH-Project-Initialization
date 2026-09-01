@@ -46,7 +46,7 @@ DSH 插件「想法落地」：让 AI 创建产品每一步对齐用户想法。
 
 - 结构定义：插件实现见 core-library/presets/alignment；生成项目结构见 maintenance-docs/Reference/project-structure.md
 - 原子化纪律：一个功能实现点 = 一个原子子 skill（66 功能点 F01-F66）；主 skill 聚合清单须与子 skill 目录一致
-- 验证单元（verify-*）由 verify 调度者组合；规则族（确认绑定/操作分级/扮演假设/因果验证/阶段推进检查）落点见 v11 设计（Other/ 内部）
+- 验证单元（verify-*）由 verify 调度者组合；规则族（确认绑定/操作分级/扮演假设/因果验证/阶段推进检查）落点：common/item-confirm/verify 等核心 skill 与 AGENTS.md.tpl
 - 模板与规则同步：改动规则时检查 doc-templates / rule-templates（zh/en）是否需要同步
 - 模板是生成到用户项目的，改动需谨慎
 - 无字面 `\n`、无残留占位符
@@ -60,7 +60,7 @@ DSH 插件「想法落地」：让 AI 创建产品每一步对齐用户想法。
 
 ## 不公开内容
 
-`Other/` 存放项目内部文档（计划/进度/审计等），**不随仓库提交**（.gitignore 已忽略），仅供本地维护。
+`Other/` 存放内部文档（如术语词典 glossary.md），**不随仓库提交**（.gitignore 已忽略），仅供本地维护。
 
 ## 提 PR 前检查
 

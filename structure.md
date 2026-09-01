@@ -29,7 +29,7 @@ DSH-Project Initialization/
 │   ├── regression.md             回归清单
 │   └── audit/                    审计
 ├── .gitignore / .gitattributes   剔除与行尾规则
-└── Other/                        其他（内部，剔除：计划/进度/审计等）
+└── Other/                        其他（内部，剔除：术语词典等内部文档）
 ```
 
 ## 文档登记表

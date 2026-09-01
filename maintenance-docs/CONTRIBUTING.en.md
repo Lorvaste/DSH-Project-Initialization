@@ -46,7 +46,7 @@ User decision > AGENTS.md (root rules) > domain rules > rules (skill rules)
 
 - Structure definition: plugin implementation lives in core-library/presets/alignment; generated-project structure in maintenance-docs/Reference/project-structure.md
 - Atomicity discipline: one function point = one atomic sub-skill (66 points F01-F66); master-skill aggregate lists must match sub-skill directories
-- Verification units (verify-*) are combined by the verify dispatcher; rule families (confirmation binding / operation grading / role-play assumptions / causal verification / stage-advance check) land per the v11 design (internal, Other/)
+- Verification units (verify-*) are combined by the verify dispatcher; rule families (confirmation binding / operation grading / role-play assumptions / causal verification / stage-advance check) land in core skills (common/item-confirm/verify) and AGENTS.md.tpl
 - Template & rule sync: when rules change, check doc-templates / rule-templates (zh/en)
 - Templates generate into user projects — change carefully
 - No literal `\n`; no leftover placeholders
@@ -60,7 +60,7 @@ User decision > AGENTS.md (root rules) > domain rules > rules (skill rules)
 
 ## Non-public content
 
-`Other/` holds internal project docs (plan/progress/audit); it is **not committed** (.gitignore covers it) and is for local use only.
+`Other/` holds internal docs (e.g., the glossary.md terminology dictionary); it is **not committed** (.gitignore covers it) and is for local use only.
 
 ## Pre-PR checklist
 
