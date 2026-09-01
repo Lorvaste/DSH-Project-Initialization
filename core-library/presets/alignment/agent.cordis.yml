@@ -1,11 +1,11 @@
 # The `alignment` agent preset: 想法落地（单入口，按上下文加载）
 #
 # 新设计要点：
-# - 保留一个场景入口；插件可被其他场景按需调用
-# - 场景 = 功能集合最小预设（需求确立 / 开发前 / 维护）；场景与功能 skill 完全拆分
+# - 保留一个 preset 入口；插件可被其他场景按需调用
+# - 无场景预设：主 skill（base/common/req/dev/mnt/rules）即入口，skill 按上下文加载
 # - skill 只依据上下文（工作区状态 / 用户指令 / 自动触发）按需加载；每个 skill 可单独调用
-# - 主 skill 识别用户语言偏好，调用 zh / en 版本内容
-# - 工具白名单：ask-user/fs/fs-search/bash|pwsh/skill/compaction（省 token，砍掉 subagent/web 等）
+# - 语言：skill 细则为中文单语；模板与文档 zh/en 镜像（主 skill 识别用户语言偏好）
+# - 工具白名单：ask-user/fs/fs-search/bash|pwsh/skill/compaction（省 token，砍掉 subagent 等）+ web 检索例外（F65/F66 专用）
 
 # ── identity ────────────────────────────────────────────────────────────────
 
@@ -16,11 +16,11 @@
       你是想法落地 Agent（模型 {{model}}，工作目录 {{cwd}}）。
       帮助用户对齐产品想法：需求收集与设计（完善补充想法）、技术选型与技术设计（基于需求定档论证）、
       需求确认（含统合节点）、规格化、变更管理、维护初始化与回归验证。
-      核心规范在场景 skills/（按需加载），必须遵守；只使用场景自带 skill，忽略其他非场景 skill。
+      核心规范在 skills/（按需加载），必须遵守；只使用本 preset 自带 skill，忽略其他非本 preset skill。
       原则：所有操作先告知理解，用户确认后再执行；AI 是引导者不是决策者，用户是唯一权威；
       阶段推进由用户决定，禁止自行"假定完成"；沉默≠同意，关键点必须显式确认；
       先查证不假设，禁止假设性结论；变更显式记录，禁止静默漂移；识别用户语言偏好调用 zh/en 版本。
-      优先级链：用户拍板 > 全局规则（AGENTS.md）> 域内规则 > 场景规则。
+      优先级链：用户拍板 > 全局规则（AGENTS.md）> 域内规则 > 规则（skill 规则）。
 
 # ── 问答与确认 ──────────────────────────────────────────────────────────────
 
@@ -47,9 +47,14 @@
   name: '@deepseek-ai/dsh-tool-pwsh'
   disabled: !!js process.platform !== 'win32'
 
+# ── web 检索（F65/F66 相似方案/竞品检索专用例外；其余用途仍省 token）────────
+
+- id: tool-web
+  name: '@deepseek-ai/dsh-tool-web'
+
 # ── skills（按需加载）───────────────────────────────────────────────────────
 
-# 只扫描场景自身 skills/（隔离非场景 skill）；baseUrl 范式随安装位置解析
+# 只扫描 preset 自身 skills/（隔离外部 skill）；baseUrl 范式随安装位置解析
 - id: skill-filesystem
   name: '@deepseek-ai/dsh-skill-filesystem'
   config:

@@ -6,16 +6,16 @@ Thank you for considering contributing to **DSH-Project Initialization** (AI ide
 
 ## What this project is
 
-A DSH plugin: single scenario entry "Idea to Project" that aligns every step of AI-built products with the user's idea.
+A DSH plugin, "Idea to Project": aligns every step of AI-built products with the user's idea.
 
-- Scenarios (= minimal function presets): requirement establishment / pre-development / maintenance
-- Functional skills (10): qa / confirm / integrate / organize / unify-terms / verify / change / regress / maintain / token-compress
-- Skills load on context, invocable standalone; the plugin can be invoked by other scenarios
+- No scenario presets: the master skill is the entry; skills load on context (workspace state / user instruction / automatic trigger)
+- 6 master skills (base / req / dev / mnt / common / rules) + verify dispatcher + 66 atomic sub-skills (73 in total)
+- Templates: doc-templates 20 + rule-templates 8 (zh/en mirrored); skill details are zh-only
 
 ## Repository structure
 
 ```
-├── core-library/presets/alignment/   Single entry: agent.cordis.yml + 12 skills + templates zh/en
+├── core-library/presets/alignment/   "Idea to Project": agent.cordis.yml + 73 skills + templates zh/en
 ├── core-library/src/                 Thin plugin shell (syncs presets/ to .agent-presets at startup)
 ├── maintenance-docs/                 Maintenance docs (install/contribute/reference/rules/regression/audit)
 ├── AGENTS.md                         Root rules
@@ -28,20 +28,25 @@ A DSH plugin: single scenario entry "Idea to Project" that aligns every step of 
 
 ### Rule priority
 
-User decision > AGENTS.md (root rules) > domain rules > scenario rules
+User decision > AGENTS.md (root rules) > domain rules > rules (skill rules)
 
 ### Rule highlights
 
 - Every operation: state understanding, user confirms, then execute
-- Phase advancement by user; no "assumed completion"
-- Verify first, no assumptions; no hypothetical conclusions
+- Confirmation binding: confirmation = explicit reply to the currently requested numbered item (returned content / context wording / silence ≠ confirmation)
+- Operation grading L0-L4: check authorization scope before executing; forbidden zones rejected, high-risk operations need a separate request, dry-run first
+- Role-play assumptions: declare assumptions before role-play; role-play assumption ≠ fact; no sycophancy, no context pandering
+- Phase advancement by user; no "assumed completion"; remind whether to run traversal checks before advancing
+- Verify first, no assumptions; no hypothetical conclusions; verify causality and premises before answering/asking
 - Requirement docs: summary lists/structures only, no references, no decision info, clean and concise
 - Docs = initial baseline, never locked
-- zh/en dual version (zh primary / en mirror)
+- zh/en dual version (zh primary / en mirror; skill details zh-only)
 
 ### Notes when changing skills
 
-- Structure definition: plugin implementation lives in core-library/presets/alignment (single-scenario alignment); generated-project structure in maintenance-docs/Reference/project-structure.md
+- Structure definition: plugin implementation lives in core-library/presets/alignment; generated-project structure in maintenance-docs/Reference/project-structure.md
+- Atomicity discipline: one function point = one atomic sub-skill (66 points F01-F66); master-skill aggregate lists must match sub-skill directories
+- Verification units (verify-*) are combined by the verify dispatcher; rule families (confirmation binding / operation grading / role-play assumptions / causal verification / stage-advance check) land per the v11 design (internal, Other/)
 - Template & rule sync: when rules change, check doc-templates / rule-templates (zh/en)
 - Templates generate into user projects — change carefully
 - No literal `\n`; no leftover placeholders
@@ -61,6 +66,7 @@ User decision > AGENTS.md (root rules) > domain rules > scenario rules
 
 - [ ] Changes follow the rule priority chain
 - [ ] Skill rules consistent with the implementation (core-library/presets/alignment/skills)
+- [ ] Master-skill aggregate lists match sub-skill directories
 - [ ] Templates & rules synced (zh/en)
 - [ ] No literal `\n`, no leftover placeholders
 - [ ] Docs updated (README / structure / user-manual as applicable)
@@ -70,6 +76,6 @@ User decision > AGENTS.md (root rules) > domain rules > scenario rules
 
 Releases go through GitHub Release (tag `vX.Y.Z`). Before release:
 
-- Confirm the "Idea to Project" scenario loads in DSH (new session → scenario picker)
+- Confirm the "Idea to Project" preset loads in DSH (new session → scenario picker)
 - Confirm on-demand skill loading works (no global skill leakage)
 - Update outdated statements in INSTALL.md / README / CHANGELOG.md

@@ -21,5 +21,5 @@
 
 ## Optional Sections
 
-- [optional] Folder registration table: folder / purpose / scenario
+- [optional] Folder registration table: folder / purpose / owner
 - [optional] Changelog: date / change

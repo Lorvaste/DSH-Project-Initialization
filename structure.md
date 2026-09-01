@@ -1,7 +1,7 @@
 # structure.md — 统一全局目录
 
 > 全局目录（维护场景定义：文档变化实时更新）。
-> 本仓库是「AI 想法落地」插件（单场景入口 alignment）。
+> 本仓库是「想法落地」插件（v1.1：主 skill + 原子子 skill，无场景预设）。
 
 ## 目录树
 
@@ -16,7 +16,10 @@ DSH-Project Initialization/
 ├── package.json                  薄插件壳（dsh bundle manifest）
 ├── cordis.patch.yml              插件壳注册
 ├── core-library/                 主体库
-│   ├── presets/alignment/      单场景入口「想法落地」：agent.cordis.yml + 12 skills + 模板 zh/en
+│   ├── presets/alignment/       「想法落地」：agent.cordis.yml + 73 skill（6 主 + verify 调度 + 66 原子子）+ 模板 zh/en
+│   │   ├── doc-templates/        文档模板 20 份（zh/en 各 20）
+│   │   ├── rule-templates/       规则模板 8 份（zh/en 各 8）
+│   │   └── skills/               73 个 skill 目录（平铺，每目录 SKILL.md）
 │   └── src/                      插件壳代码（presets 同步）
 ├── maintenance-docs/             维护文档
 │   ├── INSTALL.md / INSTALL.en.md   安装指引
@@ -26,7 +29,7 @@ DSH-Project Initialization/
 │   ├── regression.md             回归清单
 │   └── audit/                    审计
 ├── .gitignore / .gitattributes   剔除与行尾规则
-└── Other/                        其他（内部，剔除）
+└── Other/                        其他（内部，剔除：计划/进度/审计等）
 ```
 
 ## 文档登记表
@@ -47,3 +50,4 @@ DSH-Project Initialization/
 ## 变更记录
 
 - 2026-09-01：Other/ 清理更新——内部文档直接存放于 Other/（不再分区），其余内容剔除（.gitignore）
+- 2026-09-01：v1.1 发布前——目录树更新（73 skill / doc-templates 20 / rule-templates 8；无场景预设）

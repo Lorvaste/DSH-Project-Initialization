@@ -1,7 +1,7 @@
 {
   "name": "dsh-project-initialization",
-  "version": "1.0.3",
-  "description": "DSH 插件「想法落地」（DSH-Project-Initialization）：单场景入口 alignment——需求确立 / 开发前 / 维护三场景最小预设，10 个功能 skill 按上下文加载，让 AI 创建产品每一步对齐用户想法。",
+  "version": "1.1.0",
+  "description": "DSH 插件「想法落地」（DSH-Project-Initialization）：原子化 73 skill（6 主 + verify 调度 + 66 原子子，无场景预设按上下文加载），确认绑定/操作分级/扮演假设规则体系，覆盖需求确立、技术选型、维护与发布、清除整理、反馈闭环，让 AI 创建产品每一步对齐用户想法。",
   "type": "module",
   "main": "./core-library/src/index.js",
   "exports": {

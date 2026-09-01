@@ -1,30 +1,18 @@
 ---
 name: verify
-description: 遍历性检查。任意时刻用户指令或自动触发时使用。
+description: 遍历性检查调度者（唯一验证调度者）。任意时刻用户指令或自动触发时使用。
 ---
 
-# verify（遍历性检查）
+# verify（验证调度者）
 
-## 检查执行
+## 调度规则
 
-- 三层遍历：目标 / 域 / 条目
-- 七维度 + 领域模板
-- 三查：空白 / 冲突 / 重复
-
-## 报告（按证据机制）
-
-- 结论附证据来源
-- 明确"什么不算证据"
-- 反证据对照
-- 红旗词（应该/大概/看起来/就这一次/部分检查够了）→ 触发显式确认
-- 按维度展示检查过程与结果
-
-## 生效
-
-- 结果经用户确认后生效
-- 影响面复验
-- 与 organize 检查不统合
-
-## 输出
-
-- 验证报告 → 维护场景 audit/；其他阶段 Other/
+- 任何验证请求经 verify 调度：按目标选择验证单元组合（单元可单独调用）
+- 目标 → 单元组合：
+  - 需求/规格检查 → verify-3layer + verify-7dim + verify-3check + verify-placeholder
+  - 文档/结构检查 → verify-3check + verify-placeholder
+  - 变更影响 → verify-recheck（影响面复验）
+  - 回归验证 → regress-run + verify-redgreen + verify-evidence
+  - 论证/结论 → verify-evidence（证据报告）
+- 输出：verify-report（模板 verify-report.md.tpl），结果经用户确认后生效
+- 与 PG-2 联动：阶段推进前给出检查类型清单（对象 × 单元组合）

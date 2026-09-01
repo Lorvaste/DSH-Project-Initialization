@@ -1,11 +1,12 @@
 ---
 name: scaffold
-description: 生成项目骨架。骨架生成请求时使用；按模板逐项确认。
+description: 生成通用骨架（9+2 项，逐项确认）。git 就绪后使用。
 ---
 
-# scaffold（基础 skill）
+# scaffold（F53）
 
-- 按模板逐项确认生成骨架
-- 模板：doc-templates/（zh / en 按语言偏好）
-- 规则模板：rule-templates/（zh / en 按语言偏好）
-- 未确认项不生成
+- 通用骨架：README / LICENSE / AGENTS / structure / Progress / plan / Other / .gitignore / .gitattributes（逐项确认）
+- 模板：doc-templates/ + rule-templates/（zh/en 按语言偏好）
+- 未选协议（LICENSE）则跳过并显式记录
+- 文档名只用英文
+- 未确认项不生成（复用逐条确认，见 scaffold-confirm）
